@@ -1,0 +1,397 @@
+:root {
+   /*//////////////////*/
+   /*//////////////////*/
+   --size: 50px;
+   --rounded: 10px;
+   --x: Calc(var(--size) - Calc(Calc(var(--size) * 0.15) * 10));
+   --y: Calc(var(--size) - Calc(Calc(var(--size) * 0.128) * 10));
+   --alfa: 1;
+   --text-shadow: hsla(0, 0%, 0%, 0.58);
+   --color1: #dfa3a3;
+   --color2: #dfa3a3;
+   --color3: #dfa3a3;
+   --color4: #dfa3a3;
+   --color5: #dfa3a3;
+   --color6: #dfa3a3;
+
+   --text-shadow2: 2px 0 var(--text-shadow),
+      -2px 0 var(--text-shadow),
+      0 2px var(--text-shadow),
+      0 -2px var(--text-shadow),
+      1px 1px var(--text-shadow),
+      -1px -1px var(--text-shadow),
+      1px -1px var(--text-shadow),
+      -1px 1px var(--text-shadow);
+
+}
+
+* {
+   touch-action: none;
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+#container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   perspective: 2000px;
+   transform-style: preserve-3d;
+   perspective-origin: center;
+   border: 5px solid red;
+}
+
+#wd-1 {
+   border-radius: 15px 0 0 0;
+}
+
+#wd-5 {
+   border-radius: 0 15px 0 0;
+}
+
+#wd-21 {
+   border-radius: 0 0 0 15px;
+}
+
+#wd-25 {
+   border-radius: 0 0 15px 0;
+}
+
+#wd {
+   position: relative;
+   z-index: 10;
+   transform: perspective(750px) rotateX(0deg);
+   border-radius: 20px;
+   border: 5px solid #000000;
+   height: 256px;
+   width: 256px;
+   padding: 0px;
+
+   perspective: 2000px;
+   transform-style: preserve-3d;
+   perspective-origin: center;
+
+   display: grid;
+   place-content: center;
+   place-items: center;
+   grid-template-columns: repeat(5, 50px);
+   grid-template-rows: repeat(4, 50px);
+}
+
+
+#wd2 {
+   position: absolute;
+   z-index: 1;
+   transform: perspective(750px) rotateX(70deg);
+   top: 50px;
+   padding: 2px;
+   scale: 0.95;
+   border-radius: 20px;
+   box-shadow: 0 0 3px 5px #2a2a2a;
+   background-color: #2a2a2a;
+   border: 5px solid #2a2a2a;
+   opacity: 0.3;
+   height: 202px;
+   width: 252px;
+}
+
+.floor {
+   width: 50px;
+   height: 50px;
+   background-color: darkgray;
+   box-shadow: inset 2px 2px 3px 2px #2e2e2e, inset -2px -2px 3px 2px #777777;
+}
+
+.obj {
+   position: absolute;
+   border-radius: 0%;
+   width: 90%;
+   height: 90%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 30px;
+}
+
+.d3 {
+   width: 15px;
+   height: 15px;
+   border-radius: 100%;
+   perspective: 2000px;
+   perspective-origin: center;
+   transform-style: preserve-3d;
+}
+
+#key {
+   background-color: #5b4700;
+}
+
+#sword {
+   background-color: #494949;
+}
+
+#shield {
+   background-color: #494949;
+}
+
+#diamon {
+   background-color: #006f83;
+}
+
+.animate {
+   animation: rotate 2s 0s linear infinite;
+   transform: rotateZ(0deg) rotateX(-90deg) translateZ(-5px) translateY(10px) translateX(0px);
+}
+
+@keyframes rotate {
+   0% {
+      transform: rotateZ(0deg) rotateX(-90deg) translateZ(-5px) translateY(10px) translateX(0px);
+   }
+
+   100% {
+      transform: rotateZ(360deg) rotateX(-90deg) translateZ(-5px) translateY(10px) translateX(0px);
+   }
+}
+
+/*///////////////*/
+/*     PJ        */
+/*///////////////*/
+
+#pj {
+   position: absolute;
+   width: var(--size);
+   height: var(--size);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transform-origin: center;
+   transform-style: preserve-3d;
+   transform: translateZ(27px) rotateY(0deg) rotateZ(90deg) rotateX(0deg);
+}
+
+#pj>div {
+   position: relative;
+   width: var(--size);
+   height: var(--size);
+   position: absolute;
+   transform-style: preserve-3d;
+   box-sizing: border-box;
+   border: 3px solid white;
+   transition: transform 2s;
+}
+
+#pj>div:nth-child(1) {
+   background: var(--color1);
+   transform: rotateX(90deg) translateZ(Calc(var(--size) / 2));
+}
+
+#pj #sword-on {
+   background-color: red;
+   border-radius: 100%;
+   width: 90%;
+   height: 90%;
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 30px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+#pj div:nth-child(2) {
+   background: var(--color2);
+   transform: translateZ(Calc(var(--size) / 2));
+}
+
+#pj div:nth-child(2) div {
+   border-radius: 100%;
+   width: 90%;
+   height: 90%;
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 30px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+#pj div:nth-child(3) {
+   font-size: 30px;
+   text-align: center;
+   background: var(--color3);
+   transform: rotatey(90deg) translatez(Calc(var(--size) / 2));
+}
+
+#pj div:nth-child(3) div {
+
+   width: 50%;
+   height: 59%;
+   position: absolute;
+   visibility: visible;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 30px;
+   top: 50%;
+   left: 50%;
+   transform: rotateZ(270deg) translate(70%, -80%);
+}
+
+#pj div:nth-child(4) {
+   background: var(--color4);
+   transform: rotatey(180deg) translatez(Calc(var(--size) / 2));
+}
+
+#pj div:nth-child(5) {
+   background: var(--color5);
+   transform: rotatey(-90deg) translatez(Calc(var(--size) / 2));
+   transform-origin: center;
+}
+
+#pj div:nth-child(5) div {
+   border-radius: 100%;
+   width: 90%;
+   height: 90%;
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 30px;
+   top: 50%;
+   left: 50%;
+   transform-origin: center;
+   transform: rotateZ(90deg) translate(-50%, 50%);
+}
+
+#pj div:nth-child(6) {
+   background: var(--color6);
+   transform: rotatey(0deg) rotatex(-90deg) translatez(Calc(var(--size) / 2));
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+#pj #shield-on {
+   background-color: #5e2100;
+   border-radius: 100%;
+   width: 90%;
+   height: 90%;
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 30px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+#sword-content-shadow,
+#shield-content-shadow {
+   border-radius: 100%;
+   width: 90%;
+   height: 90%;
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 30px;
+}
+
+#sword-shadow,
+#shield-shadow {
+   @supports (background-clip:text) or (-webkit-background-clip:text) {
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      background-color: #0f0f0f;
+   }
+}
+
+/*******************/
+/*   option move   */
+/*******************/
+
+#options-move-container {
+   width: 160px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   gap: 5px;
+}
+
+.option-move {
+   user-select: none;
+   -webkit-tap-highlight-color: transparent;
+
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+
+   height: 40px;
+   width: 100%;
+   text-align: center;
+   text-wrap: nowrap;
+
+   border-radius: 8px;
+   background-color: #DAA520;
+   border: 2px solid #B8860B;
+   font-weight: bold;
+   color: #fff;
+   font-family: 'Arial', sans-serif;
+   font-size: 16px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.option-move input[type="radio"] {
+   display: none;
+}
+
+.option-move:hover {
+   background-color: #C1941F;
+   border-color: #A0780A;
+   color: black;
+   font-weight: 900;
+}
+
+/* Estilo cuando el botón está seleccionado */
+.option-move input[type="radio"]:checked+span {
+   font-weight: bold;
+   color: black;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: #28a745;
+   border-color: #218838;
+   border-radius: 6px;
+}
+
+/* Para que el estilo de checked se aplique al contenedor completo del label */
+.option-move input[type="radio"]:checked~span {
+   color: black;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 100%;
+   background-color: #28a745;
+   border-color: #218838;
+}
+
+/* Para el caso en que el texto no esté dentro de un span, y el input esté directamente antes del texto en el label */
+.option-move input[type="radio"]:checked+label {
+   color: black;
+   background-color: #28a745;
+   border-color: #218838;
+}
