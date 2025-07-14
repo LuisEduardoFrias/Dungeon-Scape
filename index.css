@@ -36,11 +36,17 @@
    display: flex;
    justify-content: center;
    align-items: center;
-
+   margin-top: 10px;
    perspective: 2000px;
    transform-style: preserve-3d;
    perspective-origin: center;
-   border: 5px solid red;
+   border: 0px solid red;
+}
+
+#count {
+   font-size: 26;
+   font-weight: bold;
+   margin: 10px;
 }
 
 #wd-1 {
@@ -52,10 +58,24 @@
 }
 
 #wd-21 {
+   background-color: black;
    border-radius: 0 0 0 15px;
 }
 
+#wd-22 {
+   background-color: black;
+}
+
+#wd-23 {
+   background-color: black;
+}
+
+#wd-24 {
+   background-color: black;
+}
+
 #wd-25 {
+   background-color: black;
    border-radius: 0 0 15px 0;
 }
 
@@ -135,7 +155,8 @@
    background-color: #823700;
 }
 
-#diamon>div {
+#diamon1,
+#diamon2>div {
    background-color: #0adaff;
 }
 
