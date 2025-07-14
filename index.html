@@ -13,17 +13,71 @@
    <div id="container">
       <div id="wd">
          
-         <div class="obj d3" id="enemy">😈</div>
-         <div class="obj d3" id="rock1">🪨</div>
-         <div class="obj d3" id="rock2">🪨</div>
-         <div class="obj d3" id="box1">📦</div>
-         <div class="obj d3" id="box2">📦</div>
-         <div class="obj d3" id="key"><span class="animate">🔑</span></div>
-         <div class="obj d3" id="sword"><span class="animate">🗡</span></div>
-         <div class="obj d3" id="shield"><span class="animate">🛡</span></div>
-         <div class="obj d3" id="diamon"><span class="animate">💎</span></div>
-         <div class="obj d3" id="open-lock">🔓</div>
-         <div class="obj d3" id="closed-lock">🔒</div>
+         <span class="obj" id="enemy">
+            <div>
+               <span>😈</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="rock1">
+            <div>
+               <span>🪨</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="rock2">
+            <div>
+               <span>🪨</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="box1">
+            <div>
+               <span>📦</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="box2">
+            <div>
+               <span>📦</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="key">
+            <div class="d3">
+               <span class="animate">🔑</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="sword">
+            <div class="d3">
+               <span class="animate">🗡</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="shield">
+            <div class="d3">
+               <span class="animate">🛡</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="diamon">
+            <div class="d3">
+               <span class="animate">💎</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="open-lock">
+            <div>
+               <span>🔓</span>
+            </div>
+         </span>
+         
+         <span class="obj" id="closed-lock">
+            <div>
+               <span>🔒</span>
+            </div>
+         </span>
          
          <div class="floor" id="wd-1"></div>
          <div class="floor" id="wd-2"></div>
@@ -83,7 +137,7 @@
       <!--       <div id="wd2"></div> -->
       <div id="options-move-container">
          <label id="player" class="option-move">
-            <input type="radio" id="player-input" checked name="option-move" />
+            <input type="radio" checked id="player-input" name="option-move" />
             <span>Player Character</span>
          </label>
          <label id="place" class="option-move">
@@ -95,6 +149,7 @@
    </div>
    
    <span id="count">0</span>
+   <span id="ver">0</span>
    
    <script src="index.js"></script>
 </body>
