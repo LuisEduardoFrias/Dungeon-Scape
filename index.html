@@ -10,137 +10,12 @@
 
 <body>
    
-   <div id="container">
-      <div id="wd">
-         
-         <span class="obj" id="enemy">
-            <div>
-               <span>😈</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="rock1">
-            <div>
-               <span>🪨</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="rock2">
-            <div>
-               <span>🪨</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="box1">
-            <div>
-               <span>📦</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="box2">
-            <div>
-               <span>📦</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="key">
-            <div class="d3">
-               <span class="animate">🔑</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="sword">
-            <div class="d3">
-               <span class="animate">🗡</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="shield">
-            <div class="d3">
-               <span class="animate">🛡</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="diamon1">
-            <div class="d3">
-               <span class="animate">💎</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="diamon2">
-            <div class="d3">
-               <span class="animate">💎</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="open-lock">
-            <div>
-               <span>🔓</span>
-            </div>
-         </span>
-         
-         <span class="obj" id="closed-lock">
-            <div>
-               <span>🔒</span>
-            </div>
-         </span>
-         
-         <div class="floor" id="wd-1"></div>
-         <div class="floor" id="wd-2"></div>
-         <div class="floor" id="wd-3"></div>
-         <div class="floor" id="wd-4"></div>
-         <div class="floor" id="wd-5"></div>
-         <div class="floor" id="wd-6"></div>
-         <div class="floor" id="wd-7"></div>
-         <div class="floor" id="wd-8"></div>
-         <div class="floor" id="wd-9"></div>
-         <div class="floor" id="wd-10"></div>
-         <div class="floor" id="wd-11"></div>
-         <div class="floor" id="wd-12"></div>
-         <div class="floor" id="wd-13"></div>
-         <div class="floor" id="wd-14"></div>
-         <div class="floor" id="wd-15"></div>
-         <div class="floor" id="wd-16"></div>
-         <div class="floor" id="wd-17"></div>
-         <div class="floor" id="wd-18"></div>
-         <div class="floor" id="wd-19"></div>
-         <div class="floor" id="wd-20"></div>
-         <div class="floor" id="wd-21"></div>
-         <div class="floor" id="wd-22"></div>
-         <div class="floor" id="wd-23"></div>
-         <div class="floor" id="wd-24"></div>
-         <div class="floor" id="wd-25"></div>
-         
-         <div id="pj">
-            <div>
-               <div id="sword-content-shadow">
-                  <div id="sword-shadow">🗡</div>
-               </div>
-               <div data-isAdd="false" id="sword-on">🗡</div>
-            </div>
-            <div>
-               <div>🪖</div>
-            </div>
-            <div>
-               :|
-               <div>
-                  🕶
-               </div>
-            </div>
-            <div></div>
-            <div>️
-               <div>🎒️</div>
-            </div>
-            <div>
-               <div id="shield-content-shadow">
-                  <div id="shield-shadow">🛡</div>
-               </div>
-               <div data-isAdd="false" id="shield-on">🛡</div>
-            </div>
-         </div>
-         
-      </div>
-      <!--       <div id="wd2"></div> -->
+   <div id="game-container">
+      
+      <h1>Dungeon Scape</h1>
+      
+      <span id="count">leverl 1</span>
+      
       <div id="options-move-container">
          <label id="player" class="option-move">
             <input type="radio" checked id="player-input" name="option-move" />
@@ -152,11 +27,42 @@
          </label>
       </div>
       
+      <div id="container">
+         
+         <div id="wd">
+            
+            <div class="floor" id="wd-1"></div>
+            <div class="floor" id="wd-2"></div>
+            <div class="floor" id="wd-3"></div>
+            <div class="floor" id="wd-4"></div>
+            <div class="floor" id="wd-5"></div>
+            <div class="floor" id="wd-6"></div>
+            <div class="floor" id="wd-7"></div>
+            <div class="floor" id="wd-8"></div>
+            <div class="floor" id="wd-9"></div>
+            <div class="floor" id="wd-10"></div>
+            <div class="floor" id="wd-11"></div>
+            <div class="floor" id="wd-12"></div>
+            <div class="floor" id="wd-13"></div>
+            <div class="floor" id="wd-14"></div>
+            <div class="floor" id="wd-15"></div>
+            <div class="floor" id="wd-16"></div>
+            <div class="floor" id="wd-17"></div>
+            <div class="floor" id="wd-18"></div>
+            <div class="floor" id="wd-19"></div>
+            <div class="floor" id="wd-20"></div>
+            <div class="floor" id="wd-21"></div>
+            <div class="floor" id="wd-22"></div>
+            <div class="floor" id="wd-23"></div>
+            <div class="floor" id="wd-24"></div>
+            <div class="floor" id="wd-25"></div>
+            
+         </div>
+
+      </div>
    </div>
    
-   <span id="count">leverl 1</span>
-   
-   <script src="index.js"></script>
+   <script src="index.js" type="module"></script>
 </body>
 
 </html>

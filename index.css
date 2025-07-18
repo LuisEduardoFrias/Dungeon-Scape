@@ -1,6 +1,4 @@
 :root {
-   /*//////////////////*/
-   /*//////////////////*/
    --size: 50px;
    --rounded: 10px;
    --x: Calc(var(--size) - Calc(Calc(var(--size) * 0.15) * 10));
@@ -26,11 +24,31 @@
 }
 
 * {
-   touch-action: none;
+   /* touch-action: none; */
    padding: 0;
    margin: 0;
    box-sizing: border-box;
 }
+
+h1 {
+   text-align: center;
+}
+
+#game-container {
+   display: grid;
+   grid-template-rows: 30px 35px 50px 1fr;
+   gap: -5px;
+}
+
+#options-move-container {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: rows;
+   justify-content: center;
+   gap: 5px;
+}
+
 
 #container {
    display: flex;
@@ -40,7 +58,7 @@
    perspective: 2000px;
    transform-style: preserve-3d;
    perspective-origin: center;
-   border: 0px solid red;
+   border: 1px solid red;
 }
 
 #count {
@@ -100,7 +118,6 @@
    grid-template-rows: repeat(4, 50px);
 }
 
-
 #wd2 {
    position: absolute;
    z-index: 1;
@@ -120,8 +137,9 @@
 .floor {
    width: 50px;
    height: 50px;
-   background-color: darkgray;
    box-shadow: inset 2px 2px 3px 2px #2e2e2e, inset -2px -2px 3px 2px #777777;
+   background-image: url('./images/floor.png');
+   background-size: cover;
 }
 
 .obj {
@@ -143,69 +161,39 @@
    transform-style: preserve-3d;
 }
 
-#key>div {
-   background-color: #ffca0f;
+#rock1,
+#rock2 {
+   background-image: url('./images/rock.png');
+   background-size: cover;
 }
 
-#sword>div {
-   background-color: #616161;
+#box1,
+#box2 {
+   background-image: url('./images/box.png');
+   background-size: cover;
 }
 
-#shield>div {
-   background-color: #823700;
+#closed-lock {
+   background-image: url('./images/lock.png');
+   background-size: cover;
 }
 
-#diamon1,
-#diamon2>div {
-   background-color: #0adaff;
+#key {
+   background-image: url('./images/key.png');
+   background-size: cover;
 }
 
-.animate {
-   animation: rotate 2s 0s linear infinite;
-   transform: rotateZ(0deg) rotateX(-90deg) translateZ(-5px) translateY(-20px) translateX(0px);
+#shield,
+#shield-shadow,
+#shield-on {
+   background-image: url('./images/shield.png');
+   background-size: cover;
 }
 
-@keyframes rotate {
-   0% {
-      transform: rotateZ(0deg) rotateX(-90deg) translateZ(-5px) translateY(-20px) translateX(0px);
-   }
-
-   100% {
-      transform: rotateZ(360deg) rotateX(-90deg) translateZ(-5px) translateY(-20px) translateX(0px);
-   }
-}
 
 /*///////////////*/
-/*     PJ        */
+/*     pj        */
 /*///////////////*/
-
-#pj {
-   position: absolute;
-   width: var(--size);
-   height: var(--size);
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   transform-origin: center;
-   transform-style: preserve-3d;
-   transform: translateZ(27px) rotateY(0deg) rotateZ(90deg) rotateX(0deg);
-}
-
-#pj>div {
-   position: relative;
-   width: var(--size);
-   height: var(--size);
-   position: absolute;
-   transform-style: preserve-3d;
-   box-sizing: border-box;
-   border: 3px solid white;
-   transition: transform 2s;
-}
-
-#pj>div:nth-child(1) {
-   background: var(--color1);
-   transform: rotateX(90deg) translateZ(Calc(var(--size) / 2));
-}
 
 #pj #sword-on {
    background-color: red;
@@ -220,81 +208,6 @@
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-}
-
-#pj div:nth-child(2) {
-   background: var(--color2);
-   transform: translateZ(Calc(var(--size) / 2));
-}
-
-#pj div:nth-child(2) div {
-   border-radius: 100%;
-   width: 90%;
-   height: 90%;
-   position: absolute;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-size: 30px;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-}
-
-#pj div:nth-child(3) {
-   font-size: 30px;
-   text-align: center;
-   background: var(--color3);
-   transform: rotatey(90deg) translatez(Calc(var(--size) / 2));
-}
-
-#pj div:nth-child(3) div {
-
-   width: 50%;
-   height: 59%;
-   position: absolute;
-   visibility: visible;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-size: 30px;
-   top: 50%;
-   left: 50%;
-   transform: rotateZ(270deg) translate(70%, -80%);
-}
-
-#pj div:nth-child(4) {
-   background: var(--color4);
-   transform: rotatey(180deg) translatez(Calc(var(--size) / 2));
-}
-
-#pj div:nth-child(5) {
-   background: var(--color5);
-   transform: rotatey(-90deg) translatez(Calc(var(--size) / 2));
-   transform-origin: center;
-}
-
-#pj div:nth-child(5) div {
-   border-radius: 100%;
-   width: 90%;
-   height: 90%;
-   position: absolute;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-size: 30px;
-   top: 50%;
-   left: 50%;
-   transform-origin: center;
-   transform: rotateZ(90deg) translate(-50%, 50%);
-}
-
-#pj div:nth-child(6) {
-   background: var(--color6);
-   transform: rotatey(0deg) rotatex(-90deg) translatez(Calc(var(--size) / 2));
-   display: flex;
-   justify-content: center;
-   align-items: center;
 }
 
 #pj #shield-on {
@@ -338,14 +251,6 @@
 /*   option move   */
 /*******************/
 
-#options-move-container {
-   width: 160px;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   gap: 5px;
-}
-
 .option-move {
    user-select: none;
    -webkit-tap-highlight-color: transparent;
@@ -383,7 +288,6 @@
    font-weight: 900;
 }
 
-/* Estilo cuando el botón está seleccionado */
 .option-move input[type="radio"]:checked+span {
    font-weight: bold;
    color: black;
@@ -397,7 +301,6 @@
    border-radius: 6px;
 }
 
-/* Para que el estilo de checked se aplique al contenedor completo del label */
 .option-move input[type="radio"]:checked~span {
    color: black;
    display: flex;
@@ -409,9 +312,20 @@
    border-color: #218838;
 }
 
-/* Para el caso en que el texto no esté dentro de un span, y el input esté directamente antes del texto en el label */
+
 .option-move input[type="radio"]:checked+label {
    color: black;
    background-color: #28a745;
    border-color: #218838;
+}
+
+/*******************/
+/*     hoyo    */
+/*******************/
+
+#hoyo1,
+#hoyo2 {
+   width: 50px;
+   height: 50px;
+   background-image: url('./images/hoyo.png');
 }

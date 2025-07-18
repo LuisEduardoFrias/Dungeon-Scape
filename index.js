@@ -1,3 +1,6 @@
+import { Box } from "./box.js";
+import { Player } from "./player.js";
+import { Article } from "./article.js";
 
 class touchMove {
    events = { left: [], right: [], top: [], bottom: [], end: [] };
@@ -67,27 +70,15 @@ class touchMove {
    }
 }
 
-const touch = touchMove.getInstance();
 const wd = document.querySelector("#wd");
+const pj = new Player(wd);
+const touch = touchMove.getInstance();
 //const wd2 = document.querySelector("#//wd2");
-const swordOn = document.querySelector("#sword-on");
-const shieldOn = document.querySelector("#shield-on");
+
 const count = document.querySelector("#count");
 const playerInput = document.querySelector("#player-input");
 let level = 0;
 let isNextLevel = false;
-
-const pj = {
-   hasKey: false,
-   obj: document.querySelector("#pj"),
-   x: 2,
-   y: 3,
-   state: null,
-};
-
-
-shieldOn.style.opacity = "0";
-swordOn.style.opacity = "0";
 
 const right1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
 const right2 = (pX, pY) => `translateZ(35px) translateY(${50 * pY}px) translateX(${(50 * pX) + 25}px)`;
@@ -1038,180 +1029,38 @@ const levels = [
       point: { x: 2, y: 3 },
       state: transform12,
       objs: [
-         {
-            x: 1,
-            y: 2,
-            name: "enemy",
-            disable: true,
-            obj: document.querySelector("#enemy")
-         },
-         {
-            x: 2,
-            y: 1,
-            name: "rock1",
-            disable: false,
-            obj: document.querySelector("#rock1")
-         },
-         {
-            x: 3,
-            y: 1,
-            name: " rock2",
-            disable: false,
-            obj: document.querySelector("#rock2")
-         },
-         {
-            x: 1,
-            y: 2,
-            name: "box1",
-            disable: false,
-            obj: document.querySelector("#box1")
-         },
-         {
-            x: 4,
-            y: 2,
-            name: "box2",
-            disable: false,
-            obj: document.querySelector("#box2")
-         },
-         {
-            x: 3,
-            y: 3,
-            name: "key",
-            disable: false,
-            obj: document.querySelector("#key")
-         },
-         {
-            x: 2,
-            y: 2,
-            name: "sword",
-            disable: true,
-            obj: document.querySelector("#sword")
-         },
-         {
-            x: 1,
-            y: 4,
-            name: "shield",
-            disable: true,
-            obj: document.querySelector("#shield")
-         },
-         {
-            x: 1,
-            y: 3,
-            name: "diamon1",
-            disable: false,
-            obj: document.querySelector("#diamon1")
-         },
-         {
-            x: 1,
-            y: 3,
-            name: "diamon2",
-            disable: false,
-            obj: document.querySelector("#diamon2")
-         },
-         {
-            x: 2,
-            y: 4,
-            name: "openLock",
-            disable: true,
-            obj: document.querySelector("#open-lock")
-         },
-         {
-            x: 2,
-            y: 3,
-            name: "closedLock",
-            disable: false,
-            obj: document.querySelector("#closed-lock")
-         },
+         new Article('enemy', { x: 1, y: 2, }, document.querySelector("#enemy")),
+         new Article('rock1', { x: 2, y: 1, }, document.querySelector("#rock1")),
+         new Article('rock2', { x: 3, y: 1, }, document.querySelector("#rock2")),
+         new Article('key', { x: 3, y: 3, }, document.querySelector("#key")),
+         new Article('key', { x: 3, y: 3, }, document.querySelector("#key")),
+         new Article('sword', { x: 2, y: 2, }, document.querySelector("#sword"), true),
+         new Article('shield', { x: 1, y: 4, }, document.querySelector("#shield"), true),
+         new Article('hoyo1', { x: 1, y: 3, }, document.querySelector("#hoyo1")),
+         new Article('hoyo2', { x: 1, y: 3, }, document.querySelector("#hoyo2")),
+         new Article('openLock', { x: 2, y: 4, }, document.querySelector("#openLock"), true),
+         new Article('closedLock', { x: 2, y: 3, }, document.querySelector("#closedLock")),
+         new Box(document.querySelector("#box1"), { x: 1, y: 3 }),
+         new Box(document.querySelector("#box2"), { x: 4, y: 2 }),
       ]
    },
    {
       point: { x: 1, y: 3 },
       state: transform11,
       objs: [
-         {
-            x: 2,
-            y: 2,
-            name: "enemy",
-            disable: false,
-            obj: document.querySelector("#enemy")
-         },
-         {
-            x: 1,
-            y: 2,
-            name: "rock1",
-            disable: false,
-            obj: document.querySelector("#rock1")
-         },
-         {
-            x: 3,
-            y: 0,
-            name: " rock2",
-            disable: false,
-            obj: document.querySelector("#rock2")
-         },
-         {
-            x: 4,
-            y: 1,
-            name: "box1",
-            disable: false,
-            obj: document.querySelector("#box1")
-         },
-         {
-            x: 1,
-            y: 0,
-            name: "box2",
-            disable: false,
-            obj: document.querySelector("#box2")
-         },
-         {
-            x: 1,
-            y: 1,
-            name: "key",
-            disable: false,
-            obj: document.querySelector("#key")
-         },
-         {
-            x: 3,
-            y: 2,
-            name: "sword",
-            disable: false,
-            obj: document.querySelector("#sword")
-         },
-         {
-            x: 1,
-            y: 4,
-            name: "shield",
-            disable: true,
-            obj: document.querySelector("#shield")
-         },
-         {
-            x: 3,
-            y: 3,
-            name: "diamon1",
-            disable: false,
-            obj: document.querySelector("#diamon1")
-         },
-         {
-            x: 4,
-            y: 2,
-            name: "diamon2",
-            disable: false,
-            obj: document.querySelector("#diamon2")
-         },
-         {
-            x: 2,
-            y: 4,
-            name: "openLock",
-            disable: true,
-            obj: document.querySelector("#open-lock")
-         },
-         {
-            x: 2,
-            y: 3,
-            name: "closedLock",
-            disable: false,
-            obj: document.querySelector("#closed-lock")
-         },
+         new Article('enemy', { x: 2, y: 2, }, document.querySelector("#enemy")),
+         new Article('rock1', { x: 1, y: 2, }, document.querySelector("#rock1")),
+         new Article('rock2', { x: 3, y: 0, }, document.querySelector("#rock2")),
+         new Article('key', { x: 3, y: 3, }, document.querySelector("#key")),
+         new Article('key', { x: 1, y: 1, }, document.querySelector("#key")),
+         new Article('sword', { x: 3, y: 2, }, document.querySelector("#sword"), true),
+         new Article('shield', { x: 1, y: 4, }, document.querySelector("#shield"), true),
+         new Article('hoyo1', { x: 3, y: 3, }, document.querySelector("#hoyo1")),
+         new Article('hoyo2', { x: 4, y: 2, }, document.querySelector("#hoyo2")),
+         new Article('openLock', { x: 2, y: 4, }, document.querySelector("#openLock"), true),
+         new Article('closedLock', { x: 2, y: 3, }, document.querySelector("#closedLock")),
+         new Box(document.querySelector("#box1"), { x: 4, y: 1 }),
+         new Box(document.querySelector("#box2"), { x: 1, y: 0 }),
       ]
    }
 ];
@@ -1220,14 +1069,13 @@ let points = levels[level].objs;
 function nextLevel() {
    level++;
    const obj_level = levels[level];
-   pj.x = obj_level.point.x;
-   pj.y = obj_level.point.y;
+   pj.point = { x: obj_level.point.x, y: obj_level.point.y };
    pj.state = obj_level.state;
    points = obj_level.objs;
    count.innerHTML = `Level ${level + 1}`;
 
-   pj.obj.style.top = `-4px`;
-   pj.obj.style.left = `-4px`;
+   pj.obj.style.top = `opx`;
+   pj.obj.style.left = `opx`;
    pj.obj.style.transform = `translateZ(27px) translateX(${50 * pj.x}px) translateY(${50 * pj.y}px) ${pj.state.key} `;
 
    points.forEach((ele) => {
@@ -1240,9 +1088,9 @@ function nextLevel() {
 count.innerHTML = `Level ${level + 1}`;
 
 pj.state = transform12;
-pj.obj.style.top = `-4px`;
-pj.obj.style.left = `-4px`;
-pj.obj.style.transform = `translateZ(27px) translateX(${50 * pj.x}px) translateY(${50 * pj.y}px) ${pj.state.key} `;
+pj.point = { x: pj.x, y: pj.y }
+//pj.state(pj.state.key);
+
 
 points.forEach((ele) => {
    ele.obj.style.top = `0px`;
@@ -1281,8 +1129,8 @@ function moverPlayerY(value) {
 
 function verify(value) {
    for (let ele of points) {
-      let x = pj.x;
-      let y = pj.y;
+      let x = pj.point.x;
+      let y = pj.point.y;
 
       if (value === 'right') {
          x -= 1;
@@ -1320,7 +1168,7 @@ function verify(value) {
                ele.disable = true;
                ele.obj.style.opacity = "0";
 
-               shieldOn.style.opacity = "1";
+               pj.shieldOn = true;
                return true;
             } else if (ele.disable === true) {
                return true;
@@ -1335,14 +1183,14 @@ function verify(value) {
                key.disable = true;
                key.obj.style.opacity = "0";
 
-               swordOn.style.opacity = "2";
+               pj.swordOn = true;
 
                return true;
             } else if (ele.disable === true) {
                return true;
             }
          }
-         else if (ele.name === 'diamon1' || ele.name === 'diamon2') {
+         else if (ele.name === 'hoyo1' || ele.name === 'hoyo2') {
             if (nameState === "transform1") {
                if (pj.hasKey === true) {
                   pj.hasKey = false;
@@ -1453,8 +1301,8 @@ touch.addEvent((value) => {
       platformY += value * placeRotationSensitivity;
 
       if (platformY > -20 && platformY < 0) {
-         // wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
-         //          //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
+         wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${platformY}deg) rotateZ(${platformX}deg)`;
+         //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
       }
    }
 }, 'top');
@@ -1466,8 +1314,8 @@ touch.addEvent((value) => {
       platformY += value * placeRotationSensitivity;
 
       if (platformY > -20 && platformY < 0) {
-         // wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
-         //          //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
+         wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${platformY}deg) rotateZ(${platformX}deg)`;
+         //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
       }
    }
 }, 'bottom');
