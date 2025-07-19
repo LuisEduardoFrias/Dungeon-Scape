@@ -1,113 +1,44 @@
-import { Box } from "./box.js";
+import { levels, articles, place, tait } from "./level.js";
 import { Player } from "./player.js";
-import { Article } from "./article.js";
 import { TouchMove } from "./touch_move.js";
 
-
 function init() {
-   var touch = TouchMove.getInstance();
-   touch.addEvent(end);
-   touch.addEvent(right);
-   touch.addEvent(left);
-   touch.addEvent(top);
-   touch.addEvent(bottom);
+   let touch = TouchMove.getInstance();
 
-   var wd = document.querySelector("#wd");
-   var pj = new Player(wd);
-   var count = document.querySelector("#count");
-   var playerInput = document.querySelector("#player-input");
-   var level = 0;
-   var isNextLevel = false;
+   let pj = new Player(place);
+   let level_label = document.querySelector("#level");
+   let playerInput = document.querySelector("#player-input");
+   let level = 0;
+   let isNextLevel = false;
 
+   for (let i = 1; i <= 25; i++) {
+      const div = document.createElement('div');
+      div.style.zIndex = `5`;
+      div.classList.add('tail');
+      div.setAttribute('id', `tail-${i}`);
+      tait.appendChild(div);
+   }
 
-   const enemy = new Article('enemy', null, document.querySelector("#wd"), 'shield.png');
-   const rock1 = new Article('rock1', null, document.querySelector("#wd"), 'rock.png');
-   const rock2 = new Article('rock2', null, document.querySelector("#wd"), 'rock.png');
-   const key = new Article('key', null, document.querySelector("#wd"), 'key.png');
-   const sword = new Article('sword', null, document.querySelector("#wd"), true, 'sword.gif');
-   const shield = new Article('shield', null, document.querySelector("#wd"), true, 'shield.png');
-   const hoyo1 = new Article('hoyo1', null, document.querySelector("#wd"), 'hoyo.png');
-   const hoyo2 = new Article('hoyo2', null, document.querySelector("#wd"), 'hoyo.png');
-   const openLock = new Article('openLock', null, document.querySelector("#wd"), true, 'lock.png');
-   const closedLock = new Article('closedLock', null, document.querySelector("#wd"), 'lock.png');
-   const box1 = new Box("box1", document.querySelector("#wd"), null);
-   const box2 = new Box("box2", document.querySelector("#wd"), null);
+   place.appendChild(tait);
 
-   const objPoint = [
-      enemy,
-      rock1,
-      rock2,
-      key,
-      sword,
-      shield,
-      hoyo1,
-      hoyo2,
-      openLock,
-      closedLock,
-      box1,
-      box2,
-   ];
-
-   const levels = [
-      {
-         point: { x: 2, y: 3 },
-         state: transform12,
-         objs: () => {
-            enemy.point = { x: 1, y: 2, };
-            rock1.point = { x: 2, y: 1, };
-            rock2.point = { x: 3, y: 1, };
-            key.point = { x: 3, y: 3, };
-            sword.point = { x: 2, y: 2, };
-            shield.point = { x: 1, y: 4, };
-            hoyo1.point = { x: 1, y: 3, };
-            hoyo2.point = { x: 1, y: 3, };
-            openLock.point = { x: 2, y: 4, };
-            closedLock.point = { x: 2, y: 3, };
-            box1.point = { x: 1, y: 3 };
-            box2.point = { x: 4, y: 2 };
-         }
-      },
-      {
-         point: { x: 1, y: 3 },
-         state: transform11,
-         objs: () => {
-            enemy.point = { x: 2, y: 2, };
-            rock2.point = { x: 3, y: 0, };
-            key.point = { x: 3, y: 3, };
-            sword.point = { x: 3, y: 2, };
-            shield.point = { x: 1, y: 4, };
-            hoyo1.point = { x: 3, y: 3, };
-            hoyo2.point = { x: 4, y: 2, };
-            openLock.point = { x: 2, y: 4, };
-            closedLock.point = { x: 2, y: 3, };
-            box1.point = { x: 4, y: 1 };
-            box2.point = { x: 1, y: 0 };
-         }
-      }
-   ];
+   return { pj, touch, level_label, playerInput, level, isNextLevel };
 }
-init();
+
+let { pj, touch, level_label, playerInput, level, isNextLevel } = init();
 
 function nextLevel() {
    level++;
-   const obj_level = levels[level];
-   pj.point = { x: obj_level.point.x, y: obj_level.point.y };
-   pj.state = obj_level.state;
-   count.innerHTML = `Level ${level + 1}`;
 
-   pj.obj.style.top = `opx`;
-   pj.obj.style.left = `opx`;
-   pj.obj.style.transform = `translateZ(27px) translateX(${50 * pj.x}px) translateY(${50 * pj.y}px) ${pj.state.key} `;
+   const objLevel = levels[level - 1];
 
-   obj_level.objs();
+   pj[objLevel.fn]();
+   pj.point = { ...objLevel.point };
+   objLevel.objs();
+
+   level_label.innerHTML = `Level ${level}`;
 }
-count.innerHTML = `Level ${level + 1}`;
+nextLevel();
 
-pj.state = transform12;
-pj.point = { x: pj.x, y: pj.y }
-//pj.state(pj.state.key);
-
-levels[level].objs();
 
 let platformX = 0;
 let platformY = 0;
@@ -278,11 +209,12 @@ function end(value) {
 
    if (isNextLevel) {
       isNextLevel = false;
-      nextLevel();
+      // nextLevel();
    }
 };
 
 function right(value) {
+   alert('-------')
    if (playerInput.checked) {
       moverPlayerX(value);
    } else {
@@ -328,7 +260,8 @@ function bottom(value) {
    }
 };
 
-
-
-
-
+touch.addEvent(end);
+touch.addEvent(right);
+touch.addEvent(left);
+touch.addEvent(top);
+touch.addEvent(bottom);

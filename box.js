@@ -6,12 +6,22 @@ export class Box {
 
    constructor(name, element, point) {
       const _element = this.createElement();
-      _element.style.backgroundImage = 'url("./images/box.png")';
-      element.appendChild(_element);
-      element.style.top = `0px`;
-      element.style.left = `0px`;
+
+      const content = document.createElement('div');
+      content.setAttribute('id', name);
+      content.style.position = `absolute`;
+      content.style.zIndex = `9`;
+      content.style.width = '50px';
+      content.style.height = '50px';
+      content.style.top = `0px`;
+      content.style.left = `0px`;
+      content.appendChild(_element);
+
+
+      element.appendChild(content);
+
       this._name = name;
-      this._obj = element;
+      this._obj = content;
       this.point = point;
       return this._obj;
    }
@@ -34,7 +44,6 @@ export class Box {
          nDiv.style.backgroundImage = 'url("./images/box.png")';
          nDiv.style.backgroundSize = 'cover';
          nDiv.style.transformOrigin = 'center';
-         nDiv.style.position = 'relative';
          nDiv.style.width = '50px';
          nDiv.style.height = '50px';
          nDiv.style.position = 'absolute';
