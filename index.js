@@ -1,1089 +1,105 @@
 import { Box } from "./box.js";
 import { Player } from "./player.js";
 import { Article } from "./article.js";
+import { TouchMove } from "./touch_move.js";
 
-class touchMove {
-   events = { left: [], right: [], top: [], bottom: [], end: [] };
-   static instance = null;
 
-   static getInstance() {
-      if (!this.instance) {
-         this.instance = new touchMove();
-      }
-      return this.instance;
-   }
+function init() {
+   var touch = TouchMove.getInstance();
+   touch.addEvent(end);
+   touch.addEvent(right);
+   touch.addEvent(left);
+   touch.addEvent(top);
+   touch.addEvent(bottom);
 
-   constructor() {
-      let startX = 0;
-      let startY = 0;
-      const threshold = 1;
+   var wd = document.querySelector("#wd");
+   var pj = new Player(wd);
+   var count = document.querySelector("#count");
+   var playerInput = document.querySelector("#player-input");
+   var level = 0;
+   var isNextLevel = false;
 
-      document.addEventListener('touchstart', (event) => {
-         startX = event.touches[0].clientX;
-         startY = event.touches[0].clientY;
-      });
 
-      document.addEventListener('touchmove', (event) => {
-         event.preventDefault();
+   const enemy = new Article('enemy', null, document.querySelector("#wd"), 'shield.png');
+   const rock1 = new Article('rock1', null, document.querySelector("#wd"), 'rock.png');
+   const rock2 = new Article('rock2', null, document.querySelector("#wd"), 'rock.png');
+   const key = new Article('key', null, document.querySelector("#wd"), 'key.png');
+   const sword = new Article('sword', null, document.querySelector("#wd"), true, 'sword.gif');
+   const shield = new Article('shield', null, document.querySelector("#wd"), true, 'shield.png');
+   const hoyo1 = new Article('hoyo1', null, document.querySelector("#wd"), 'hoyo.png');
+   const hoyo2 = new Article('hoyo2', null, document.querySelector("#wd"), 'hoyo.png');
+   const openLock = new Article('openLock', null, document.querySelector("#wd"), true, 'lock.png');
+   const closedLock = new Article('closedLock', null, document.querySelector("#wd"), 'lock.png');
+   const box1 = new Box("box1", document.querySelector("#wd"), null);
+   const box2 = new Box("box2", document.querySelector("#wd"), null);
 
-         const currentX = event.touches[0].clientX;
-         const currentY = event.touches[0].clientY;
+   const objPoint = [
+      enemy,
+      rock1,
+      rock2,
+      key,
+      sword,
+      shield,
+      hoyo1,
+      hoyo2,
+      openLock,
+      closedLock,
+      box1,
+      box2,
+   ];
 
-         const totalDeltaX = currentX - startX;
-         const totalDeltaY = currentY - startY;
-
-         if (Math.abs(totalDeltaX) > Math.abs(totalDeltaY) && Math.abs(totalDeltaX) > threshold) {
-            if (totalDeltaX > 0) {
-               this.events.right.forEach(eventCallback => eventCallback(totalDeltaX));
-            } else {
-               this.events.left.forEach(eventCallback => eventCallback(totalDeltaX));
-            }
-         } else if (Math.abs(totalDeltaY) > Math.abs(totalDeltaX) && Math.abs(totalDeltaY) > threshold) {
-            if (totalDeltaY > 0) {
-               this.events.bottom.forEach(eventCallback => eventCallback(totalDeltaY));
-            } else {
-               this.events.top.forEach(eventCallback => eventCallback(totalDeltaY));
-            }
+   const levels = [
+      {
+         point: { x: 2, y: 3 },
+         state: transform12,
+         objs: () => {
+            enemy.point = { x: 1, y: 2, };
+            rock1.point = { x: 2, y: 1, };
+            rock2.point = { x: 3, y: 1, };
+            key.point = { x: 3, y: 3, };
+            sword.point = { x: 2, y: 2, };
+            shield.point = { x: 1, y: 4, };
+            hoyo1.point = { x: 1, y: 3, };
+            hoyo2.point = { x: 1, y: 3, };
+            openLock.point = { x: 2, y: 4, };
+            closedLock.point = { x: 2, y: 3, };
+            box1.point = { x: 1, y: 3 };
+            box2.point = { x: 4, y: 2 };
          }
-      });
-
-      document.addEventListener('touchend', (event) => {
-         this.events.end.forEach(eventCallback => eventCallback());
-      });
-   }
-
-   addEvent(fn, type) {
-      const eventsType = this.events[type];
-      if (eventsType) {
-         eventsType.push(fn);
-      }
-   }
-
-   removeEvent(fn, type) {
-      const eventsType = this.events[type];
-      if (eventsType) {
-         const index = eventsType.findIndex((event) => event === fn);
-         if (index > -1) {
-            eventsType.splice(index, 1);
+      },
+      {
+         point: { x: 1, y: 3 },
+         state: transform11,
+         objs: () => {
+            enemy.point = { x: 2, y: 2, };
+            rock2.point = { x: 3, y: 0, };
+            key.point = { x: 3, y: 3, };
+            sword.point = { x: 3, y: 2, };
+            shield.point = { x: 1, y: 4, };
+            hoyo1.point = { x: 3, y: 3, };
+            hoyo2.point = { x: 4, y: 2, };
+            openLock.point = { x: 2, y: 4, };
+            closedLock.point = { x: 2, y: 3, };
+            box1.point = { x: 4, y: 1 };
+            box2.point = { x: 1, y: 0 };
          }
       }
-   }
+   ];
 }
+init();
 
-const wd = document.querySelector("#wd");
-const pj = new Player(wd);
-const touch = touchMove.getInstance();
-//const wd2 = document.querySelector("#//wd2");
-
-const count = document.querySelector("#count");
-const playerInput = document.querySelector("#player-input");
-let level = 0;
-let isNextLevel = false;
-
-const right1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
-const right2 = (pX, pY) => `translateZ(35px) translateY(${50 * pY}px) translateX(${(50 * pX) + 25}px)`;
-const right3 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${(50 * pX) + 50}px)`;
-
-const left1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
-const left2 = (pX, pY) => `translateZ(35px) translateY(${50 * pY}px) translateX(${(50 * pX) - 25}px)`;
-const left3 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${(50 * pX) - 50}px)`;
-
-const top1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
-const top2 = (pX, pY) => `translateZ(35px) translateY(${(50 * pY) - 25}px) translateX(${50 * pX}px)`;
-const top3 = (pX, pY) => `translateZ(27px) translateY(${(50 * pY) - 50}px) translateX(${50 * pX}px)`;
-
-const bottom1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
-const bottom2 = (pX, pY) => `translateZ(35px) translateY(${(50 * pY) + 25}px) translateX(${50 * pX}px)`;
-const bottom3 = (pX, pY) => `translateZ(27px) translateY(${(50 * pY) + 50}px) translateX(${50 * pX}px)`;
-
-let transform11 = {
-   na: "transform11",
-   key: `rotateZ(0deg) rotateY(0deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform61;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(0deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform41;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(0deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform21;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(45deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform31;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-45deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
-         ];
-      },
-   }
-};
-let transform12 = {
-   na: "transform12",
-   key: `rotateZ(90deg) rotateY(0deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform22;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(45deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform32;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-45deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform42;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg)   rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(0deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform62;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(0deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-let transform13 = {
-   na: "transform13",
-   key: `rotateZ(180deg) rotateY(0deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform43;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(0deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform63;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(0deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform33;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-45deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform23;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(45deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-   }
-};
-let transform14 = {
-   na: "transform14",
-   key: `rotateZ(270deg) rotateY(0deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform34;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-45deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform24;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(45deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform64;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY45deg) rotateX(0deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform44;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-45deg) rotateX(0deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-
-////////////////
-
-let transform21 = {
-   na: "transform21",
-   key: `rotateZ(0deg) rotateY(0deg) rotateX(90deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform64;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(90deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform42;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(90deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform53;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(135deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(180deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform11;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(45deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-let transform22 = {
-   na: "transform22",
-   key: `rotateZ(90deg) rotateY(0deg) rotateX(90deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform54;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(135deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(180deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform12;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(45deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform43;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(90deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform61;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(90deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(90deg)` },
-         ];
-      },
-   }
-};
-let transform23 = {
-   na: "transform23",
-   key: `rotateZ(180deg) rotateY(0deg) rotateX(90deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform44;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(90deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform62;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(90deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform13;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(45deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform51;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(135deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(180deg)` },
-         ];
-      },
-   }
-};
-let transform24 = {
-   na: "transform24",
-   key: `rotateZ(270deg) rotateY(0deg) rotateX(90deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform14;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-135deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-180deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform52;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-45deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform63;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(45deg) rotateX(90deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform41;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-45deg) rotateX(90deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(90deg)` },
-         ];
-      },
-   }
-};
-
-////////////////
-
-let transform31 = {
-   na: "transform31",
-   key: `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform62;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(-90deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(-90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform44;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(-90deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(-90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform11;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-45deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform53;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-135deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-180deg)` },
-         ];
-      },
-   }
-};
-let transform32 = {
-   na: "transform32",
-   key: `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform12;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-45deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform54;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-135deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-180deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform41;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(-90deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(-90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform63;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(-90deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(-90deg)` },
-         ];
-      },
-   }
-};
-let transform33 = {
-   na: "transform33",
-   key: `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform42;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(-90deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(-90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform64;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(-90deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(-90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform51;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-135deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-180deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform13;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-45deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-let transform34 = {
-   na: "transform34",
-   key: `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform52;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-135deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-180deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform14;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-45deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform61;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(45deg) rotateX(-90deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(-90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform43;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-45deg) rotateX(-90deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(-90deg)` },
-         ];
-      },
-   }
-};
-
-////////////////
-
-let transform41 = {
-   na: "transform41",
-   key: `rotateZ(0deg) rotateY(-90deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform11;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(0deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg)   rotateX(0deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform51;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg)  rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-135deg) rotateX(0deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-180deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform24;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-90deg) rotateX(90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-45deg) rotateX(90deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(-90deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform32;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-90deg) rotateX(90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-135deg) rotateX(90deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-180deg) rotateX(90deg)` },
-         ];
-      },
-   }
-};
-let transform42 = {
-   na: "transform42",
-   key: `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform21;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(90deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform33;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-135deg) rotateX(90deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-180deg) rotateX(90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform52;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-135deg) rotateX(0deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-180deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform12;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(0deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-let transform43 = {
-   na: "transform43",
-   key: `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform53;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-135deg) rotateX(0deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-180deg) rotateX(0deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform13;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(0deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform34;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-135deg) rotateX(90deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-180deg) rotateX(90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform22;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(90deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-   }
-};
-let transform44 = {
-   na: "transform44",
-   key: `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform31;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-135deg) rotateX(90deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-180deg) rotateX(90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform23;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(90deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform14;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-55deg)rotateX(0deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform54;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-135deg) rotateX(0deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(-180deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-
-////////////////
-
-let transform51 = {
-   na: "transform51",
-   key: `rotateZ(0deg) rotateY(180deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform41;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(225deg) rotateX(0deg )` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(270deg) rotateX(0deg )` },
-         ];
-      },
-      left: () => {
-         pj.state = transform61;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(135deg) rotateX(0deg )` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform23;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(-45deg )` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(-90deg )` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform33;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(45deg )` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(90deg )` },
-         ];
-      },
-   }
-};
-let transform52 = {
-   na: "transform52",
-   key: `rotateZ(90deg) rotateY(180deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform24;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-45deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform34;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(45deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform62;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(135deg) rotateX(0deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform42;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(225deg) rotateX(0deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(270deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-let transform53 = {
-   na: "transform53",
-   key: `rotateZ(180deg) rotateY(180deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform63;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(135deg) rotateX(0deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform43;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(225deg) rotateX(0deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(270deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform31;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(45deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform21;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(-45deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(-90deg)` },
-         ];
-      },
-   }
-};
-let transform54 = {
-   na: "transform54",
-   key: `rotateZ(270deg) rotateY(180deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform32;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(45deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform22;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(-45deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(-90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform44;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(225deg) rotateX(0deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(270deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform64;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(135deg) rotateX(0deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-
-////////////////
-
-let transform61 = {
-   na: "transform61",
-   key: `rotateZ(0deg) rotateY(90deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform51;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(135deg) rotateX(0deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform11;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(0deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform22;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(90deg )` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(90deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform34;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(135deg) rotateX(90deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(90deg)` },
-         ];
-      },
-   }
-};
-let transform62 = {
-   na: "transform62",
-   key: `rotateZ(90deg) rotateY(90deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform23;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(90deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform31;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(135deg) rotateX(90deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform12;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(0deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform52;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(130deg) rotateX(0deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-let transform63 = {
-   na: "transform63",
-   key: `rotateZ(180deg) rotateY(90deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform13;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(0deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform53;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(135deg) rotateX(0deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform32;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(-90deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(-90deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform24;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(-90deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(135deg) rotateX(-90deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
-         ];
-      },
-   }
-};
-let transform64 = {
-   na: "transform64",
-   key: `rotateZ(270deg) rotateY(90deg) rotateX(0deg)`,
-   moves: {
-      right: () => {
-         pj.state = transform33;
-         return [
-            { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(90deg)` },
-            { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(135deg) rotateX(90deg)` },
-            { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(90deg)` },
-         ];
-      },
-      left: () => {
-         pj.state = transform21;
-         return [
-            { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(90deg)` },
-            { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(90deg)` },
-            { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-         ];
-      },
-      top: () => {
-         pj.state = transform54;
-         return [
-            { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
-            { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(135deg) rotateX(0deg)` },
-            { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
-         ];
-      },
-      bottom: () => {
-         pj.state = transform14;
-         return [
-            { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
-            { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(45deg) rotateX(0deg)` },
-            { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-         ];
-      },
-   }
-};
-
-const levels = [
-   {
-      point: { x: 2, y: 3 },
-      state: transform12,
-      objs: [
-         new Article('enemy', { x: 1, y: 2, }, document.querySelector("#enemy")),
-         new Article('rock1', { x: 2, y: 1, }, document.querySelector("#rock1")),
-         new Article('rock2', { x: 3, y: 1, }, document.querySelector("#rock2")),
-         new Article('key', { x: 3, y: 3, }, document.querySelector("#key")),
-         new Article('key', { x: 3, y: 3, }, document.querySelector("#key")),
-         new Article('sword', { x: 2, y: 2, }, document.querySelector("#sword"), true),
-         new Article('shield', { x: 1, y: 4, }, document.querySelector("#shield"), true),
-         new Article('hoyo1', { x: 1, y: 3, }, document.querySelector("#hoyo1")),
-         new Article('hoyo2', { x: 1, y: 3, }, document.querySelector("#hoyo2")),
-         new Article('openLock', { x: 2, y: 4, }, document.querySelector("#openLock"), true),
-         new Article('closedLock', { x: 2, y: 3, }, document.querySelector("#closedLock")),
-         new Box(document.querySelector("#box1"), { x: 1, y: 3 }),
-         new Box(document.querySelector("#box2"), { x: 4, y: 2 }),
-      ]
-   },
-   {
-      point: { x: 1, y: 3 },
-      state: transform11,
-      objs: [
-         new Article('enemy', { x: 2, y: 2, }, document.querySelector("#enemy")),
-         new Article('rock1', { x: 1, y: 2, }, document.querySelector("#rock1")),
-         new Article('rock2', { x: 3, y: 0, }, document.querySelector("#rock2")),
-         new Article('key', { x: 3, y: 3, }, document.querySelector("#key")),
-         new Article('key', { x: 1, y: 1, }, document.querySelector("#key")),
-         new Article('sword', { x: 3, y: 2, }, document.querySelector("#sword"), true),
-         new Article('shield', { x: 1, y: 4, }, document.querySelector("#shield"), true),
-         new Article('hoyo1', { x: 3, y: 3, }, document.querySelector("#hoyo1")),
-         new Article('hoyo2', { x: 4, y: 2, }, document.querySelector("#hoyo2")),
-         new Article('openLock', { x: 2, y: 4, }, document.querySelector("#openLock"), true),
-         new Article('closedLock', { x: 2, y: 3, }, document.querySelector("#closedLock")),
-         new Box(document.querySelector("#box1"), { x: 4, y: 1 }),
-         new Box(document.querySelector("#box2"), { x: 1, y: 0 }),
-      ]
-   }
-];
-
-let points = levels[level].objs;
 function nextLevel() {
    level++;
    const obj_level = levels[level];
    pj.point = { x: obj_level.point.x, y: obj_level.point.y };
    pj.state = obj_level.state;
-   points = obj_level.objs;
    count.innerHTML = `Level ${level + 1}`;
 
    pj.obj.style.top = `opx`;
    pj.obj.style.left = `opx`;
    pj.obj.style.transform = `translateZ(27px) translateX(${50 * pj.x}px) translateY(${50 * pj.y}px) ${pj.state.key} `;
 
-   points.forEach((ele) => {
-      ele.obj.style.top = `0px`;
-      ele.obj.style.left = `0px`;
-      ele.obj.style.opacity = ele.disable ? "0" : "1";
-      ele.obj.style.transform = `translateX(${50 * ele.x}px) translateY(${50 * ele.y}px)`;
-   })
+   obj_level.objs();
 }
 count.innerHTML = `Level ${level + 1}`;
 
@@ -1091,13 +107,7 @@ pj.state = transform12;
 pj.point = { x: pj.x, y: pj.y }
 //pj.state(pj.state.key);
 
-
-points.forEach((ele) => {
-   ele.obj.style.top = `0px`;
-   ele.obj.style.left = `0px`;
-   ele.obj.style.opacity = ele.disable ? "0" : "1";
-   ele.obj.style.transform = `translateX(${50 * ele.x}px) translateY(${50 * ele.y}px)`;
-})
+levels[level].objs();
 
 let platformX = 0;
 let platformY = 0;
@@ -1128,7 +138,7 @@ function moverPlayerY(value) {
 }
 
 function verify(value) {
-   for (let ele of points) {
+   for (let ele of objPoint) {
       let x = pj.point.x;
       let y = pj.point.y;
 
@@ -1145,7 +155,7 @@ function verify(value) {
          y += 1;
       }
 
-      if (ele.x === x && ele.y === y && ele.disable === false) {
+      if (ele.point.x === x && ele.point.y === y && ele.disable === false) {
          const oldState = pj.state;
          const move = pj.state.moves[value];
          move();
@@ -1223,7 +233,7 @@ function verify(value) {
    return true;
 }
 
-touch.addEvent((value) => {
+function end(value) {
    const opcionesDeTemporizacion = {
       duration: 1000,
       iterations: 1,
@@ -1270,11 +280,9 @@ touch.addEvent((value) => {
       isNextLevel = false;
       nextLevel();
    }
-}, 'end');
+};
 
-// Notas adicionales:
-// - Añade `touch - action: none; ` en el CSS del elemento que rotas para evitar el scroll del navegador.
-touch.addEvent((value) => {
+function right(value) {
    if (playerInput.checked) {
       moverPlayerX(value);
    } else {
@@ -1282,9 +290,9 @@ touch.addEvent((value) => {
       wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${platformY}deg) rotateZ(${platformX}deg)`;
       //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
    }
-}, 'right');
+};
 
-touch.addEvent((value) => {
+function left(value) {
    if (playerInput.checked) {
       moverPlayerX(value);
    } else {
@@ -1292,9 +300,9 @@ touch.addEvent((value) => {
       wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${platformY}deg) rotateZ(${platformX}deg)`;
       //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
    }
-}, 'left');
+};
 
-touch.addEvent((value) => {
+function top(value) {
    if (playerInput.checked) {
       moverPlayerY(value);
    } else {
@@ -1305,9 +313,9 @@ touch.addEvent((value) => {
          //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
       }
    }
-}, 'top');
+};
 
-touch.addEvent((value) => {
+function bottom(value) {
    if (playerInput.checked) {
       moverPlayerY(value);
    } else {
@@ -1318,7 +326,7 @@ touch.addEvent((value) => {
          //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
       }
    }
-}, 'bottom');
+};
 
 
 

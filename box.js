@@ -2,11 +2,15 @@ export class Box {
    _point = { x: 0, y: 0 };
    _disable = false;
    _obj = null;
+   _name = "";
 
-   constructor(element, point) {
-      element.appendChild(this.createElement());
+   constructor(name, element, point) {
+      const _element = this.createElement();
+      _element.style.backgroundImage = 'url("./images/box.png")';
+      element.appendChild(_element);
       element.style.top = `0px`;
       element.style.left = `0px`;
+      this._name = name;
       this._obj = element;
       this.point = point;
       return this._obj;

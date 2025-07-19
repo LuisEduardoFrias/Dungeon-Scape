@@ -4,21 +4,31 @@ export class Article {
    _obj = null;
    _name = "";
 
-   constructor(name, point, element, disable) {
-      element.appendChild(this.createElement());
-      element.style.top = `0px`;
-      element.style.left = `0px`;
+   constructor(name, point, element, disable, img) {
+      const _element = this.createElement();
+      _element.style.backgroundImage = `url("./images/${img}")`;
+      _element.style.backgroundSize = 'cover';
+
+      const content = document.createElement('div');
+      content.appendChild(_element);
+
+      content.style.position = `absolute`;
+      content.style.top = `0px`;
+      content.style.left = `0px`;
+
+      element.appendChild(_element);
+
       this.display = disable;
+      this._obj = content;
       this.point = point;
       this._name = name;
-      this._obj = element;
 
       return this._obj;
    }
 
    createElement() {
       const div = document.createElement('div');
-      div.setAttribute('id', th._name);
+      div.setAttribute('id', this._name);
       div.style.position = 'absolute';
       div.style.width = '50px';
       div.style.height = '50px';
@@ -27,10 +37,10 @@ export class Article {
       div.style.alignItems = 'center';
       div.style.transformOrigin = 'center';
 
-      if (thid._name === "enemy") {
+      if (this._name === "enemy") {
          div.innerHTML = '😈';
       }
-      if (thid._name === "sword") {
+      if (this._name === "sword") {
          div.innerHTML = ' 🗡';
       }
 
@@ -43,6 +53,8 @@ export class Article {
    }
 
    set point(point) {
+      if (!point) return;
+
       this._point = point;
       this._obj.style.top = `${50 * point.x}px`;
       this._obj.style.left = `${50 * point.y}px`;
