@@ -1,31 +1,22 @@
-import { levels, articles, place, tait } from "./level.js";
+import { levels, articles, tait } from "./level.js";
 import { Player } from "./player.js";
 import { TouchMove } from "./touch_move.js";
+import { Place } from "./place.js";
 
 function init() {
    let touch = TouchMove.getInstance();
+   const place = new Place(tait);
+   let pj = new Player(tait);
 
-   let pj = new Player(place);
    let level_label = document.querySelector("#level");
    let playerInput = document.querySelector("#player-input");
    let level = 0;
    let isNextLevel = false;
 
-   for (let i = 1; i <= 25; i++) {
-      const div = document.createElement('div');
-      div.style.zIndex = `5`;
-      div.classList.add('tail');
-      div.setAttribute('id', `tail-${i}`);
-      tait.appendChild(div);
-   }
-
-   place.appendChild(tait);
-
-   return { pj, touch, level_label, playerInput, level, isNextLevel };
+   return { pj, touch, place, level_label, playerInput, level, isNextLevel };
 }
 
-let { pj, touch, level_label, playerInput, level, isNextLevel } = init();
-
+let { pj, touch, place, level_label, playerInput, level, isNextLevel } = init();
 function nextLevel() {
    level++;
 
@@ -39,10 +30,6 @@ function nextLevel() {
 }
 nextLevel();
 
-
-let platformX = 0;
-let platformY = 0;
-const placeRotationSensitivity = 0.009;
 let rightAnimation = false;
 let leftAnimation = false;
 let topAnimation = false;
@@ -69,9 +56,11 @@ function moverPlayerY(value) {
 }
 
 function verify(value) {
-   for (let ele of objPoint) {
-      let x = pj.point.x;
-      let y = pj.point.y;
+
+   for (let ele of articles) {
+      let x = pj.x;
+      let y = pj.y;
+
 
       if (value === 'right') {
          x -= 1;
@@ -86,11 +75,12 @@ function verify(value) {
          y += 1;
       }
 
+      console.log("ele: ", ele);
       if (ele.point.x === x && ele.point.y === y && ele.disable === false) {
          const oldState = pj.state;
          const move = pj.state.moves[value];
          move();
-         let nameState = pj.state.na;
+         let nameState = pj.state.name;
          nameState = nameState.substring(0, nameState.length - 1);
          pj.state = oldState;
 
@@ -164,13 +154,14 @@ function verify(value) {
    return true;
 }
 
-function end(value) {
+touch.addEvent((value) => {
    const opcionesDeTemporizacion = {
       duration: 1000,
       iterations: 1,
       easing: 'ease-in-out',
       fill: 'forwards'
    };
+
    let keyframesDeAnimacion = [];
 
    if (pj.x < 4 && rightAnimation === true) {
@@ -205,63 +196,44 @@ function end(value) {
       }
    }
 
+   console.log("---: ", pj)
+
    pj.obj.animate(keyframesDeAnimacion, opcionesDeTemporizacion);
 
    if (isNextLevel) {
       isNextLevel = false;
-      // nextLevel();
+      nextLevel();
    }
-};
+}, 'end');
 
-function right(value) {
-   alert('-------')
+touch.addEvent((value) => {
    if (playerInput.checked) {
       moverPlayerX(value);
    } else {
-      platformX += value * placeRotationSensitivity;
-      wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${platformY}deg) rotateZ(${platformX}deg)`;
-      //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
+      place.right = value;
    }
-};
+}, 'right');
 
-function left(value) {
+touch.addEvent((value) => {
    if (playerInput.checked) {
       moverPlayerX(value);
    } else {
-      platformX += value * placeRotationSensitivity;
-      wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${platformY}deg) rotateZ(${platformX}deg)`;
-      //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
+      place.left = value;
    }
-};
+}, 'left');
 
-function top(value) {
+touch.addEvent((value) => {
    if (playerInput.checked) {
       moverPlayerY(value);
    } else {
-      platformY += value * placeRotationSensitivity;
-
-      if (platformY > -20 && platformY < 0) {
-         wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${platformY}deg) rotateZ(${platformX}deg)`;
-         //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
-      }
+      place.top = value;
    }
-};
+}, 'top');
 
-function bottom(value) {
+touch.addEvent((value) => {
    if (playerInput.checked) {
       moverPlayerY(value);
    } else {
-      platformY += value * placeRotationSensitivity;
-
-      if (platformY > -20 && platformY < 0) {
-         wd.style.transform = `perspective(750px) rotateX(70deg) rotateY(${platformY}deg) rotateZ(${platformX}deg)`;
-         //wd2.style.transform = `perspective(750px) rotateX(70deg) rotateY(${ platformY }deg) rotateZ(${ platformX }deg)`;
-      }
+      place.bottom = value;
    }
-};
-
-touch.addEvent(end);
-touch.addEvent(right);
-touch.addEvent(left);
-touch.addEvent(top);
-touch.addEvent(bottom);
+}, 'bottom');

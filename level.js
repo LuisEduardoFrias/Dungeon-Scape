@@ -1,11 +1,25 @@
 import { Article } from "./article.js";
 import { Box } from "./box.js";
 
-const place = document.querySelector("#place");
 const tait = document.createElement('div');
 tait.setAttribute('id', 'content-tail');
+tait.style.position = "relative"; // Importante para posicionar los hijos
+tait.style.zIndex = "10";
+tait.style.borderRadius = "20px";
+tait.style.border = "5px solid #bab2b2";
+tait.style.height = "256px";
+tait.style.width = "256px";
+tait.style.padding = "0px";
+tait.style.display = "grid";
+tait.style.placeContent = "center";
+tait.style.placeItems = "center";
+tait.style.gridTemplateColumns = "repeat(5, 50px)";
+tait.style.gridTemplateRows = "repeat(4, 50px)";
+tait.style.perspective = '750px';
+tait.style.transformStyle = 'preserve-3d';
+tait.style.transformOrigin = 'center center';
 
-const enemy = new Article('enemy', null, tait, false, 'enemy.png');
+const enemy = new Article('enemy', null, tait, false, 'enemy2.png');
 const rock1 = new Article('rock1', null, tait, false, 'rock.png');
 const rock2 = new Article('rock2', null, tait, false, 'rock.png');
 const key = new Article('key', null, tait, false, 'key.png');
@@ -13,7 +27,7 @@ const sword = new Article('sword', null, tait, true, ['sword1.png', 'sword2.png'
 const shield = new Article('shield', null, tait, true, 'shield.png');
 const hole1 = new Article('hole1', null, tait, false, 'hole.png');
 const hole2 = new Article('hole2', null, tait, false, 'hole.png');
-const openLock = new Article('openLock', null, tait, true, 'lock.png');
+const openLock = new Article('openLock', null, tait, true, 'lock2.png');
 const closedLock = new Article('closedLock', null, tait, false, 'lock.png');
 const box1 = new Box("box1", tait, null);
 const box2 = new Box("box2", tait, null);
@@ -40,21 +54,24 @@ setBottomPosition
 */
 const levels = [
    {
-      point: { x: 2, y: 3 },
+      point: { x: 3, y: 3 },
       fn: "setBottomPosition",
       objs: () => {
          enemy.point = { x: 0, y: 0, };
+         enemy.disable = true;
          rock1.point = { x: 1, y: 0, };
          rock2.point = { x: 2, y: 0, };
          key.point = { x: 3, y: 0, };
-         sword.point = { x: 4, y: 0, };
-         shield.point = { x: 0, y: 1, };
+         sword.point = { x: 4, y: 3, };
+         sword.disable = true;
+         shield.point = { x: 2, y: 1, };
          hole1.point = { x: 1, y: 1, };
          hole2.point = { x: 2, y: 1, };
-         openLock.point = { x: 3, y: 1, };
-         closedLock.point = { x: 4, y: 1, };
-         box1.point = { x: 2, y: 3 };
-         box2.point = { x: 3, y: 3 };
+         openLock.point = { x: 2, y: 4, };
+         openLock.disable = true;
+         closedLock.point = { x: 2, y: 3, };
+         box1.point = { x: 0, y: 3 };
+         box2.point = { x: 0, y: 2 };
       }
    },
    {
@@ -76,4 +93,4 @@ const levels = [
    }
 ];
 
-export { levels, articles, place, tait };
+export { levels, articles, tait };

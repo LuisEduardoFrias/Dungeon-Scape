@@ -12,8 +12,9 @@ export class Article {
       content.style.display = `flex`;
       content.style.justifyContent = `center`;
       content.style.alignItems = `center`;
-      content.style.transform = `rotateZ(-90deg)`;
-      content.style.zIndex = `9`;
+      content.style.transform = `translateZ(1px) rotateZ(0deg)`;
+      content.style.zIndex = '2';
+      content.style.transform = 'translateZ(1px)';
       content.style.top = `0px`;
       content.style.left = `0px`;
       content.appendChild(_element);
@@ -62,12 +63,15 @@ export class Article {
       this._obj.style.opacity = disable ? "0" : "1";
    }
 
+   get point() {
+      return this._point;
+   }
+
    set point(point) {
       if (!point) return;
 
       this._point = point;
-      this._obj.style.top = `${50 * point.x}px`;
-      this._obj.style.left = `${50 * point.y}px`;
-      // console.log(this._obj);
+      this._obj.style.top = `${50 * point.y}px`;
+      this._obj.style.left = `${50 * point.x}px`;
    }
 }

@@ -27,35 +27,35 @@ export class Player {
       key: `rotateZ(0deg) rotateY(0deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform61;
+            this._state = this.#transform61;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(0deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(45deg) rotateX(0deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
             ];
          },
          left: () => {
-            this._state = transform41;
+            this._state = this.#transform41;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(0deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(0deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform21;
+            this._state = this.#transform21;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(45deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(45deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform31;
+            this._state = this.#transform31;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-45deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-45deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
             ];
          },
       }
@@ -65,35 +65,35 @@ export class Player {
       key: `rotateZ(90deg) rotateY(0deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform22;
+            this._state = this.#transform22;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(45deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(45deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
          left: () => {
-            this._state = transform32;
+            this._state = this.#transform32;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-45deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-45deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
             ];
          },
          top: () => {
-            this._state = transform42;
+            this._state = this.#transform42;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg)   rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(0deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg)   rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(0deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform62;
+            this._state = this.#transform62;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(0deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(45deg) rotateX(0deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
             ];
          },
       }
@@ -103,35 +103,35 @@ export class Player {
       key: `rotateZ(180deg) rotateY(0deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform43;
+            this._state = this.#transform43;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(0deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(0deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)` },
             ];
          },
          left: () => {
-            this._state = transform63;
+            this._state = this.#transform63;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(0deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(45deg) rotateX(0deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform33;
+            this._state = this.#transform33;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-45deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-45deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform23;
+            this._state = this.#transform23;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(45deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(45deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
       }
@@ -141,35 +141,35 @@ export class Player {
       key: `rotateZ(270deg) rotateY(0deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform34;
+            this._state = this.#transform34;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-45deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-45deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
             ];
          },
          left: () => {
-            this._state = transform24;
+            this._state = this.#transform24;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(45deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(45deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
          top: () => {
-            this._state = transform64;
+            this._state = this.#transform64;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY45deg) rotateX(0deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY45deg) rotateX(0deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform44;
+            this._state = this.#transform44;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-45deg) rotateX(0deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-45deg) rotateX(0deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)` },
             ];
          },
       }
@@ -182,35 +182,35 @@ export class Player {
       key: `rotateZ(0deg) rotateY(0deg) rotateX(90deg)`,
       moves: {
          right: () => {
-            this._state = transform64;
+            this._state = this.#transform64;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(90deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(45deg) rotateX(90deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(90deg) rotateX(90deg)` },
             ];
          },
          left: () => {
-            this._state = transform42;
+            this._state = this.#transform42;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(90deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(90deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(90deg)` },
             ];
          },
          top: () => {
-            this._state = transform53;
+            this._state = this.#transform53;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(135deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(180deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(135deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(180deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform11;
+            this._state = this.#transform11;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(45deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(45deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
       }
@@ -220,35 +220,35 @@ export class Player {
       key: `rotateZ(90deg) rotateY(0deg) rotateX(90deg)`,
       moves: {
          right: () => {
-            this._state = transform54;
+            this._state = this.#transform54;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(135deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(180deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(135deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(180deg)` },
             ];
          },
          left: () => {
-            this._state = transform12;
+            this._state = this.#transform12;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(45deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(45deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform43;
+            this._state = this.#transform43;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(90deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(90deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform61;
+            this._state = this.#transform61;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(90deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(45deg) rotateX(90deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(90deg)` },
             ];
          },
       }
@@ -258,35 +258,35 @@ export class Player {
       key: `rotateZ(180deg) rotateY(0deg) rotateX(90deg)`,
       moves: {
          right: () => {
-            this._state = transform44;
+            this._state = this.#transform44;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(90deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(90deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(90deg)` },
             ];
          },
          left: () => {
-            this._state = transform62;
+            this._state = this.#transform62;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(90deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(45deg) rotateX(90deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(90deg) rotateX(90deg)` },
             ];
          },
          top: () => {
-            this._state = transform13;
+            this._state = this.#transform13;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(45deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(45deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform51;
+            this._state = this.#transform51;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(135deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(180deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(135deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(180deg)` },
             ];
          },
       }
@@ -296,35 +296,35 @@ export class Player {
       key: `rotateZ(270deg) rotateY(0deg) rotateX(90deg)`,
       moves: {
          right: () => {
-            this._state = transform14;
+            this._state = this.#transform14;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-135deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-180deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-135deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-180deg)` },
             ];
          },
          left: () => {
-            this._state = transform52;
+            this._state = this.#transform52;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-45deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-45deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform63;
+            this._state = this.#transform63;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(45deg) rotateX(90deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(45deg) rotateX(90deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(90deg) rotateX(90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform41;
+            this._state = this.#transform41;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-45deg) rotateX(90deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-45deg) rotateX(90deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(90deg)` },
             ];
          },
       }
@@ -337,35 +337,35 @@ export class Player {
       key: `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)`,
       moves: {
          right: () => {
-            this._state = transform62;
+            this._state = this.#transform62;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(-90deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(-90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(45deg) rotateX(-90deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(90deg) rotateX(-90deg)` },
             ];
          },
          left: () => {
-            this._state = transform44;
+            this._state = this.#transform44;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(-90deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(-90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(-90deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(-90deg)` },
             ];
          },
          top: () => {
-            this._state = transform11;
+            this._state = this.#transform11;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-45deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-45deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform53;
+            this._state = this.#transform53;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-135deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-180deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-135deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(-180deg)` },
             ];
          },
       }
@@ -375,35 +375,35 @@ export class Player {
       key: `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)`,
       moves: {
          right: () => {
-            this._state = transform12;
+            this._state = this.#transform12;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-45deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-45deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          left: () => {
-            this._state = transform54;
+            this._state = this.#transform54;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-135deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-180deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-135deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-180deg)` },
             ];
          },
          top: () => {
-            this._state = transform41;
+            this._state = this.#transform41;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(-90deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(-90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(-90deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(-90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform63;
+            this._state = this.#transform63;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(-90deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(-90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(45deg) rotateX(-90deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(-90deg)` },
             ];
          },
       }
@@ -413,35 +413,35 @@ export class Player {
       key: `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)`,
       moves: {
          right: () => {
-            this._state = transform42;
+            this._state = this.#transform42;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(-90deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(-90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(-90deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(-90deg)` },
             ];
          },
          left: () => {
-            this._state = transform64;
+            this._state = this.#transform64;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(-90deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(-90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(45deg) rotateX(-90deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(90deg) rotateX(-90deg)` },
             ];
          },
          top: () => {
-            this._state = transform51;
+            this._state = this.#transform51;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-135deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-180deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-135deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-180deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform13;
+            this._state = this.#transform13;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-45deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(-45deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
       }
@@ -451,35 +451,35 @@ export class Player {
       key: `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)`,
       moves: {
          right: () => {
-            this._state = transform52;
+            this._state = this.#transform52;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-135deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-180deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-135deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-180deg)` },
             ];
          },
          left: () => {
-            this._state = transform14;
+            this._state = this.#transform14;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-45deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-45deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform61;
+            this._state = this.#transform61;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(45deg) rotateX(-90deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(-90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(45deg) rotateX(-90deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(90deg) rotateX(-90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform43;
+            this._state = this.#transform43;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-45deg) rotateX(-90deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(-90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-45deg) rotateX(-90deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(-90deg)` },
             ];
          },
       }
@@ -492,35 +492,35 @@ export class Player {
       key: `rotateZ(0deg) rotateY(-90deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform11;
+            this._state = this.#transform11;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(0deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg)   rotateX(0deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(0deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg)   rotateX(0deg)` },
             ];
          },
          left: () => {
-            this._state = transform51;
+            this._state = this.#transform51;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg)  rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-135deg) rotateX(0deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-180deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-90deg)  rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-135deg) rotateX(0deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-180deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform24;
+            this._state = this.#transform24;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-90deg) rotateX(90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-45deg) rotateX(90deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(-90deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(-90deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(-90deg) rotateY(-45deg) rotateX(90deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(-90deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform32;
+            this._state = this.#transform32;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-90deg) rotateX(90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-135deg) rotateX(90deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(-90deg) rotateY(-180deg) rotateX(90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(-90deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(-90deg) rotateY(-135deg) rotateX(90deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(-90deg) rotateY(-180deg) rotateX(90deg)` },
             ];
          },
       }
@@ -530,35 +530,35 @@ export class Player {
       key: `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform21;
+            this._state = this.#transform21;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(90deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-45deg) rotateX(90deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
          left: () => {
-            this._state = transform33;
+            this._state = this.#transform33;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(-135deg) rotateX(90deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(-180deg) rotateX(90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-135deg) rotateX(90deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(-180deg) rotateX(90deg)` },
             ];
          },
          top: () => {
-            this._state = transform52;
+            this._state = this.#transform52;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-135deg) rotateX(0deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-180deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-135deg) rotateX(0deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-180deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform12;
+            this._state = this.#transform12;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(0deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(0deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
       }
@@ -568,35 +568,35 @@ export class Player {
       key: `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform53;
+            this._state = this.#transform53;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-135deg) rotateX(0deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-180deg) rotateX(0deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-135deg) rotateX(0deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-180deg) rotateX(0deg)` },
             ];
          },
          left: () => {
-            this._state = transform13;
+            this._state = this.#transform13;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(0deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(0deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform34;
+            this._state = this.#transform34;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-135deg) rotateX(90deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(-180deg) rotateX(90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-135deg) rotateX(90deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-180deg) rotateX(90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform22;
+            this._state = this.#transform22;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(90deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(-45deg) rotateX(90deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
       }
@@ -606,35 +606,35 @@ export class Player {
       key: `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform31;
+            this._state = this.#transform31;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-135deg) rotateX(90deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(-180deg) rotateX(90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-135deg) rotateX(90deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-180deg) rotateX(90deg)` },
             ];
          },
          left: () => {
-            this._state = transform23;
+            this._state = this.#transform23;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(90deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-90deg) rotateX(90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(-45deg) rotateX(90deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
          top: () => {
-            this._state = transform14;
+            this._state = this.#transform14;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-55deg)rotateX(0deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-55deg)rotateX(0deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform54;
+            this._state = this.#transform54;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(-135deg) rotateX(0deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(-180deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-90deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-135deg) rotateX(0deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(-180deg) rotateX(0deg)` },
             ];
          },
       }
@@ -647,35 +647,35 @@ export class Player {
       key: `rotateZ(0deg) rotateY(180deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform41;
+            this._state = this.#transform41;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(225deg) rotateX(0deg )` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(270deg) rotateX(0deg )` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(225deg) rotateX(0deg )` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(270deg) rotateX(0deg )` },
             ];
          },
          left: () => {
-            this._state = transform61;
+            this._state = this.#transform61;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(135deg) rotateX(0deg )` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(135deg) rotateX(0deg )` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform23;
+            this._state = this.#transform23;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(-45deg )` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(-90deg )` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(-45deg )` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(-90deg )` },
             ];
          },
          bottom: () => {
-            this._state = transform33;
+            this._state = this.#transform33;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(45deg )` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(90deg )` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg )` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(45deg )` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(90deg )` },
             ];
          },
       }
@@ -685,35 +685,35 @@ export class Player {
       key: `rotateZ(90deg) rotateY(180deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform24;
+            this._state = this.#transform24;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-45deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-45deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
             ];
          },
          left: () => {
-            this._state = transform34;
+            this._state = this.#transform34;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(45deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(45deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(90deg)` },
             ];
          },
          top: () => {
-            this._state = transform62;
+            this._state = this.#transform62;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(135deg) rotateX(0deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(135deg) rotateX(0deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform42;
+            this._state = this.#transform42;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(225deg) rotateX(0deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(270deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(225deg) rotateX(0deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(270deg) rotateX(0deg)` },
             ];
          },
       }
@@ -723,35 +723,35 @@ export class Player {
       key: `rotateZ(180deg) rotateY(180deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform63;
+            this._state = this.#transform63;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(135deg) rotateX(0deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(135deg) rotateX(0deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
             ];
          },
          left: () => {
-            this._state = transform43;
+            this._state = this.#transform43;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(225deg) rotateX(0deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(270deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(225deg) rotateX(0deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(270deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform31;
+            this._state = this.#transform31;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(45deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(45deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform21;
+            this._state = this.#transform21;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(-45deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(-90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(-45deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(-90deg)` },
             ];
          },
       }
@@ -761,35 +761,35 @@ export class Player {
       key: `rotateZ(270deg) rotateY(180deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform32;
+            this._state = this.#transform32;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(45deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(180deg) rotateX(45deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(180deg) rotateX(90deg)` },
             ];
          },
          left: () => {
-            this._state = transform22;
+            this._state = this.#transform22;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(-45deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(-90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(180deg) rotateX(-45deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(180deg) rotateX(-90deg)` },
             ];
          },
          top: () => {
-            this._state = transform44;
+            this._state = this.#transform44;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(225deg) rotateX(0deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(270deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(225deg) rotateX(0deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(270deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform64;
+            this._state = this.#transform64;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(135deg) rotateX(0deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(135deg) rotateX(0deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
             ];
          },
       }
@@ -802,35 +802,35 @@ export class Player {
       key: `rotateZ(0deg) rotateY(90deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform51;
+            this._state = this.#transform51;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(135deg) rotateX(0deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(135deg) rotateX(0deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(0deg)` },
             ];
          },
          left: () => {
-            this._state = transform11;
+            this._state = this.#transform11;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(0deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(45deg) rotateX(0deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform22;
+            this._state = this.#transform22;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(90deg )` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(90deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(90deg )` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(45deg) rotateX(90deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform34;
+            this._state = this.#transform34;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(135deg) rotateX(90deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(135deg) rotateX(90deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(90deg)` },
             ];
          },
       }
@@ -840,35 +840,35 @@ export class Player {
       key: `rotateZ(90deg) rotateY(90deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform23;
+            this._state = this.#transform23;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(90deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(90deg) rotateX(90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(45deg) rotateX(90deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
          left: () => {
-            this._state = transform31;
+            this._state = this.#transform31;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(135deg) rotateX(90deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(90deg) rotateX(90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(135deg) rotateX(90deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(90deg)` },
             ];
          },
          top: () => {
-            this._state = transform12;
+            this._state = this.#transform12;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(0deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(45deg) rotateX(0deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform52;
+            this._state = this.#transform52;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(130deg) rotateX(0deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(130deg) rotateX(0deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(0deg)` },
             ];
          },
       }
@@ -878,35 +878,35 @@ export class Player {
       key: `rotateZ(180deg) rotateY(90deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform13;
+            this._state = this.#transform13;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(180deg) rotateY(45deg) rotateX(0deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(45deg) rotateX(0deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
          left: () => {
-            this._state = transform53;
+            this._state = this.#transform53;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(180deg) rotateY(135deg) rotateX(0deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(135deg) rotateX(0deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(180deg) rotateY(180deg) rotateX(0deg)` },
             ];
          },
          top: () => {
-            this._state = transform32;
+            this._state = this.#transform32;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(-90deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(90deg) rotateY(45deg) rotateX(-90deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(-90deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(45deg) rotateX(-90deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(0deg) rotateX(-90deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform24;
+            this._state = this.#transform24;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(90deg) rotateY(90deg) rotateX(-90deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(90deg) rotateY(135deg) rotateX(-90deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(90deg) rotateX(-90deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(135deg) rotateX(-90deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(90deg) rotateY(180deg) rotateX(-90deg)` },
             ];
          },
       }
@@ -916,35 +916,35 @@ export class Player {
       key: `rotateZ(270deg) rotateY(90deg) rotateX(0deg)`,
       moves: {
          right: () => {
-            this._state = transform33;
+            this._state = this.#transform33;
             return [
-               { transform: right1(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(90deg)` },
-               { transform: right2(pj.x, pj.y) + `rotateZ(0deg) rotateY(135deg) rotateX(90deg)` },
-               { transform: right3(pj.x, pj.y) + `rotateZ(0deg) rotateY(180deg) rotateX(90deg)` },
+               { transform: right1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(90deg) rotateX(90deg)` },
+               { transform: right2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(135deg) rotateX(90deg)` },
+               { transform: right3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(180deg) rotateX(90deg)` },
             ];
          },
          left: () => {
-            this._state = transform21;
+            this._state = this.#transform21;
             return [
-               { transform: left1(pj.x, pj.y) + `rotateZ(0deg) rotateY(90deg) rotateX(90deg)` },
-               { transform: left2(pj.x, pj.y) + `rotateZ(0deg) rotateY(45deg) rotateX(90deg)` },
-               { transform: left3(pj.x, pj.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
+               { transform: left1(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(90deg) rotateX(90deg)` },
+               { transform: left2(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(45deg) rotateX(90deg)` },
+               { transform: left3(this._point.x, this._point.y) + `rotateZ(0deg) rotateY(0deg) rotateX(90deg)` },
             ];
          },
          top: () => {
-            this._state = transform54;
+            this._state = this.#transform54;
             return [
-               { transform: top1(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
-               { transform: top2(pj.x, pj.y) + `rotateZ(270deg) rotateY(135deg) rotateX(0deg)` },
-               { transform: top3(pj.x, pj.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
+               { transform: top1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: top2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(135deg) rotateX(0deg)` },
+               { transform: top3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(180deg) rotateX(0deg)` },
             ];
          },
          bottom: () => {
-            this._state = transform14;
+            this._state = this.#transform14;
             return [
-               { transform: bottom1(pj.x, pj.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
-               { transform: bottom2(pj.x, pj.y) + `rotateZ(270deg) rotateY(45deg) rotateX(0deg)` },
-               { transform: bottom3(pj.x, pj.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
+               { transform: bottom1(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(90deg) rotateX(0deg)` },
+               { transform: bottom2(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(45deg) rotateX(0deg)` },
+               { transform: bottom3(this._point.x, this._point.y) + `rotateZ(270deg) rotateY(0deg) rotateX(0deg)` },
             ];
          },
       }
@@ -952,43 +952,40 @@ export class Player {
 
    ////////////////
 
-   constructor(element) {
-      element.appendChild(this.createElement());
-      element.style.top = `0px`;
-      element.style.left = `0px`;
-      this._obj = element;
-      //this.shieldOn = true;
-      //this.swordOn = true;
+   constructor(parentElement) {
+      const mainCubeDiv = document.createElement('div');
+      mainCubeDiv.setAttribute('id', 'player-main-cube');
+      mainCubeDiv.style.position = 'absolute';
+      mainCubeDiv.style.width = '50px';
+      mainCubeDiv.style.height = '50px';
+      mainCubeDiv.style.display = 'flex';
+      mainCubeDiv.style.justifyContent = 'center';
+      mainCubeDiv.style.alignItems = 'center';
+      mainCubeDiv.style.transformOrigin = 'center center -25px';
+      mainCubeDiv.style.transformStyle = 'preserve-3d';
+      mainCubeDiv.style.transform = 'translateZ(27px) rotateY(0deg) rotateZ(0deg) rotateX(0deg)';
+
+      this._createFaces(mainCubeDiv);
+
+      parentElement.appendChild(mainCubeDiv);
+
+      this._obj = mainCubeDiv;
    }
 
-   createElement() {
-      const div = document.createElement('div');
-      div.setAttribute('id', 'box');
-      div.style.position = 'absolute';
-      div.style.width = '50px';
-      div.style.height = '50px';
-      div.style.display = 'flex';
-      div.style.justifyContent = 'center';
-      div.style.alignItems = 'center';
-      div.style.transformOrigin = 'center';
-      div.style.transformStyle = 'preserve-3d';
-      div.style.transform = 'translateZ(27px) rotateY(0deg) rotateZ(90deg) rotateX(0deg)';
-
+   _createFaces(cubeDiv) {
       for (let i = 1; i <= 6; i++) {
          const nDiv = document.createElement('div');
-         nDiv.style.backgroundImage = 'url("./images/box.png")';
          nDiv.style.backgroundSize = 'cover';
-         nDiv.style.transformOrigin = 'center';
          nDiv.style.width = '50px';
          nDiv.style.height = '50px';
          nDiv.style.position = 'absolute';
+         nDiv.style.backgroundColor = 'black';
          nDiv.style.transformStyle = 'preserve-3d';
-         nDiv.style.backgroundColor = 'gray';
 
          if (i === 1) {
             /***   side sword  ****/
             nDiv.style.backgroundImage = 'url("./images/pj-side.png")';
-            nDiv.style.transform = 'rotateX(90deg) translateZ(Calc(50 / 2))';
+            nDiv.style.transform = 'rotateX(90deg) translateZ(25px)';
 
             const n2Div = document.createElement('div');
             n2Div.setAttribute('id', 'sword-shadow');
@@ -1008,23 +1005,23 @@ export class Player {
          } else if (i === 2) {
             /***   top  ****/
             nDiv.style.backgroundImage = 'url("./images/pj-top.png")';
-            nDiv.style.transform = 'rotateZ(-90deg) translateZ(Calc(50 / 2))';
+            nDiv.style.transform = 'rotateZ(-90deg) translateZ(25px)';
          } else if (i === 3) {
             /***   pj-from.png  ****/
             nDiv.style.backgroundImage = 'url("./images/pj-from.png")';
-            nDiv.style.transform = 'rotatey(90deg) rotateZ(-90deg) translatez(Calc(50 / 2))';
+            nDiv.style.transform = 'rotatey(90deg) rotateZ(-90deg) translatez(25px)';
          } else if (i === 4) {
             /***   drown  ****/
             //nDiv.style.backgroundImage = 'url("./images/pj-drown.png")';
-            nDiv.style.transform = 'rotatey(180deg) translatez(Calc(50 / 2))';
+            nDiv.style.transform = 'rotatey(180deg) translatez(25px)';
          } else if (i === 5) {
             /***   bottom  ****/
             nDiv.style.backgroundImage = 'url("./images/pj-bottom.png")';
-            nDiv.style.transform = 'rotatey(-90deg) rotateZ(90deg) translatez(Calc(50 / 2))';
+            nDiv.style.transform = 'rotatey(-90deg) rotateZ(90deg) translatez(25px)';
          } else if (i === 6) {
             /***   side shild  ****/
             nDiv.style.backgroundImage = 'url("./images/pj-side.png")';
-            nDiv.style.transform = 'rotatey(0deg) rotatex(-90deg) translatez(Calc(50 / 2))';
+            nDiv.style.transform = 'rotatey(0deg) rotatex(-90deg) translatez(25px)';
 
             const n2Div = document.createElement('div');
             n2Div.setAttribute('id', 'shield-shadow');
@@ -1042,10 +1039,8 @@ export class Player {
             this._shieldOn = n3Div;
             nDiv.appendChild(n3Div);
          }
-         div.appendChild(nDiv);
+         cubeDiv.appendChild(nDiv);
       }
-
-      return div;
    }
 
    get hasKey() {
@@ -1068,11 +1063,31 @@ export class Player {
       return this._point;
    }
 
+   get x() {
+      return this._point.x;
+   }
+
+   get y() {
+      return this._point.y;
+   }
+
    set point(point) {
       this._point = point;
-      this._obj.style.top = `${50 * point.x}px`;
-      this._obj.style.left = `${50 * point.y}px`;
-      this._obj.style.transform = `translateZ(27px) ${this._state.key} `;
+      this._obj.style.top = `${(50 * point.y)}px`;
+      this._obj.style.left = `${(50 * point.x)}px`;
+      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+   }
+
+   set x(x) {
+      this._point = { ...this._point, x };
+      this._obj.style.left = `${(50 * x)}px`;
+      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+   }
+
+   set y(y) {
+      this._point = { ...this._point, y };
+      this._obj.style.top = `${(50 * y)}px`;
+      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
    }
 
    set shieldOn(activate) {
