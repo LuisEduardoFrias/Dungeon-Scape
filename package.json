@@ -1,12 +1,12 @@
 {
-  "name": "masmorra",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+   "name": "Dungeon Scape",
+   "version": "1.0.0",
+   "main": "index.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "keywords": ["game","js"],
+   "author": "luis eduardo",
+   "license": "ISC",
+   "description": "Es un juego basado en un juego de mesa llamado 'masmorra maldita'"
 }
