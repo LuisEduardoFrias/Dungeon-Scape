@@ -1,3 +1,4 @@
+
 const right1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
 const right2 = (pX, pY) => `translateZ(35px) translateY(${50 * pY}px) translateX(${(50 * pX) + 25}px)`;
 const right3 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${(50 * pX) + 50}px)`;
@@ -6,11 +7,11 @@ const left1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(
 const left2 = (pX, pY) => `translateZ(35px) translateY(${50 * pY}px) translateX(${(50 * pX) - 25}px)`;
 const left3 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${(50 * pX) - 50}px)`;
 
-const top1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
+const top1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY       }px) translateX(${50 * pX}px)`;
 const top2 = (pX, pY) => `translateZ(35px) translateY(${(50 * pY) - 25}px) translateX(${50 * pX}px)`;
 const top3 = (pX, pY) => `translateZ(27px) translateY(${(50 * pY) - 50}px) translateX(${50 * pX}px)`;
 
-const bottom1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
+const bottom1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY       }px) translateX(${50 * pX}px)`;
 const bottom2 = (pX, pY) => `translateZ(35px) translateY(${(50 * pY) + 25}px) translateX(${50 * pX}px)`;
 const bottom3 = (pX, pY) => `translateZ(27px) translateY(${(50 * pY) + 50}px) translateX(${50 * pX}px)`;
 
@@ -1057,6 +1058,10 @@ export class Player {
 
    set state(state) {
       this._state = state;
+   }
+
+   get obj() {
+      return this._obj;
    }
 
    get point() {

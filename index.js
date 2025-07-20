@@ -75,7 +75,6 @@ function verify(value) {
          y += 1;
       }
 
-      console.log("ele: ", ele);
       if (ele.point.x === x && ele.point.y === y && ele.disable === false) {
          const oldState = pj.state;
          const move = pj.state.moves[value];
@@ -149,6 +148,7 @@ function verify(value) {
 
          return false;
       }
+
    }
 
    return true;
@@ -166,37 +166,35 @@ touch.addEvent((value) => {
 
    if (pj.x < 4 && rightAnimation === true) {
       rightAnimation = false;
+      console.log("--- rigth")
       if (verify('left')) {
          keyframesDeAnimacion = pj.state.moves.right();
          pj.x += 1;
       }
    }
-
-   if (pj.x > 0 && leftAnimation === true) {
+   else if (pj.x > 0 && leftAnimation === true) {
       leftAnimation = false;
+      console.log("--- left")
       if (verify('right')) {
          keyframesDeAnimacion = pj.state.moves.left();
          pj.x -= 1;
       }
    }
-
-   if (pj.y < 3 && topAnimation === true) {
+   else if (pj.y < 3 && topAnimation === true) {
       topAnimation = false;
+      console.log("--- top")
       if (verify('bottom')) {
          keyframesDeAnimacion = pj.state.moves.bottom();
          pj.y += 1;
       }
    }
-
-   if (pj.y > 0 && bottomAnimation === true) {
+   else if (pj.y > 0 && bottomAnimation === true) {
       bottomAnimation = false;
       if (verify('top')) {
          keyframesDeAnimacion = pj.state.moves.top();
          pj.y -= 1;
       }
    }
-
-   console.log("---: ", pj)
 
    pj.obj.animate(keyframesDeAnimacion, opcionesDeTemporizacion);
 
