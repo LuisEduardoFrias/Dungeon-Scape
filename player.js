@@ -7,11 +7,11 @@ const left1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(
 const left2 = (pX, pY) => `translateZ(35px) translateY(${50 * pY}px) translateX(${(50 * pX) - 25}px)`;
 const left3 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${(50 * pX) - 50}px)`;
 
-const top1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY       }px) translateX(${50 * pX}px)`;
+const top1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
 const top2 = (pX, pY) => `translateZ(35px) translateY(${(50 * pY) - 25}px) translateX(${50 * pX}px)`;
 const top3 = (pX, pY) => `translateZ(27px) translateY(${(50 * pY) - 50}px) translateX(${50 * pX}px)`;
 
-const bottom1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY       }px) translateX(${50 * pX}px)`;
+const bottom1 = (pX, pY) => `translateZ(27px) translateY(${50 * pY}px) translateX(${50 * pX}px)`;
 const bottom2 = (pX, pY) => `translateZ(35px) translateY(${(50 * pY) + 25}px) translateX(${50 * pX}px)`;
 const bottom3 = (pX, pY) => `translateZ(27px) translateY(${(50 * pY) + 50}px) translateX(${50 * pX}px)`;
 
@@ -24,7 +24,7 @@ export class Player {
    _swordOn = null;
 
    #transform11 = {
-      nameme: "transform11",
+      name: "transform11",
       key: `rotateZ(0deg) rotateY(0deg) rotateX(0deg)`,
       moves: {
          right: () => {
@@ -62,7 +62,7 @@ export class Player {
       }
    };
    #transform12 = {
-      nameme: "transform12",
+      name: "transform12",
       key: `rotateZ(90deg) rotateY(0deg) rotateX(0deg)`,
       moves: {
          right: () => {
@@ -100,7 +100,7 @@ export class Player {
       }
    };
    #transform13 = {
-      nameme: "transform13",
+      name: "transform13",
       key: `rotateZ(180deg) rotateY(0deg) rotateX(0deg)`,
       moves: {
          right: () => {
@@ -138,7 +138,7 @@ export class Player {
       }
    };
    #transform14 = {
-      nameme: "transform14",
+      name: "transform14",
       key: `rotateZ(270deg) rotateY(0deg) rotateX(0deg)`,
       moves: {
          right: () => {
@@ -179,7 +179,7 @@ export class Player {
    ////////////////
 
    #transform21 = {
-      nameme: "transform21",
+      name: "transform21",
       key: `rotateZ(0deg) rotateY(0deg) rotateX(90deg)`,
       moves: {
          right: () => {
@@ -217,7 +217,7 @@ export class Player {
       }
    };
    #transform22 = {
-      nameme: "transform22",
+      name: "transform22",
       key: `rotateZ(90deg) rotateY(0deg) rotateX(90deg)`,
       moves: {
          right: () => {
@@ -255,7 +255,7 @@ export class Player {
       }
    };
    #transform23 = {
-      nameme: "transform23",
+      name: "transform23",
       key: `rotateZ(180deg) rotateY(0deg) rotateX(90deg)`,
       moves: {
          right: () => {
@@ -293,7 +293,7 @@ export class Player {
       }
    };
    #transform24 = {
-      nameme: "transform24",
+      name: "transform24",
       key: `rotateZ(270deg) rotateY(0deg) rotateX(90deg)`,
       moves: {
          right: () => {
@@ -959,10 +959,12 @@ export class Player {
       mainCubeDiv.style.position = 'absolute';
       mainCubeDiv.style.width = '50px';
       mainCubeDiv.style.height = '50px';
+      mainCubeDiv.style.top = '0px';
+      mainCubeDiv.style.left = '0px';
       mainCubeDiv.style.display = 'flex';
       mainCubeDiv.style.justifyContent = 'center';
       mainCubeDiv.style.alignItems = 'center';
-      mainCubeDiv.style.transformOrigin = 'center center -25px';
+      mainCubeDiv.style.transformOrigin = 'center center';
       mainCubeDiv.style.transformStyle = 'preserve-3d';
       mainCubeDiv.style.transform = 'translateZ(27px) rotateY(0deg) rotateZ(0deg) rotateX(0deg)';
 
@@ -1078,21 +1080,23 @@ export class Player {
 
    set point(point) {
       this._point = point;
-      this._obj.style.top = `${(50 * point.y)}px`;
-      this._obj.style.left = `${(50 * point.x)}px`;
-      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      //this._obj.style.top = `${(50 * point.y)}px`;
+      //this._obj.style.left = `${(50 * point.x)}px`;
+      //this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+
+      this._obj.style.transform = `translateZ(27px) translateY(${50 * point.y}px) translateX(${50 * point.x}px) ${this._state.key}`;
    }
 
    set x(x) {
       this._point = { ...this._point, x };
-      this._obj.style.left = `${(50 * x)}px`;
-      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      //this._obj.style.left = `${(50 * x)}px`;
+      //this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
    }
 
    set y(y) {
       this._point = { ...this._point, y };
-      this._obj.style.top = `${(50 * y)}px`;
-      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      //this._obj.style.top = `${(50 * y)}px`;
+      //this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
    }
 
    set shieldOn(activate) {

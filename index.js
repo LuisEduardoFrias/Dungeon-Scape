@@ -8,15 +8,18 @@ function init() {
    const place = new Place(tait);
    let pj = new Player(tait);
 
+   let moves = 0;
    let level_label = document.querySelector("#level");
+   let moves_label = document.querySelector("#moves");
    let playerInput = document.querySelector("#player-input");
    let level = 0;
    let isNextLevel = false;
 
-   return { pj, touch, place, level_label, playerInput, level, isNextLevel };
+   return { pj, touch, place, moves, moves_label, level_label, playerInput, level, isNextLevel };
 }
 
-let { pj, touch, place, level_label, playerInput, level, isNextLevel } = init();
+let { pj, touch, place, moves, moves_label, level_label, playerInput, level, isNextLevel } = init();
+
 function nextLevel() {
    level++;
 
@@ -25,6 +28,8 @@ function nextLevel() {
    pj[objLevel.fn]();
    pj.point = { ...objLevel.point };
    objLevel.objs();
+
+   moves_label.innerHTML = `Moves: ${objLevel.moves}`;
 
    level_label.innerHTML = `Level ${level}`;
 }
@@ -55,6 +60,17 @@ function moverPlayerY(value) {
    }
 }
 
+function movePrompt() {
+   moves++;
+   const objLevel = levels[level - 1];
+
+   if (objLevel.moves - moves < 0) {
+      moves_label.style.color = "red";
+   }
+
+   moves_label.innerHTML = `Moves: ${objLevel.moves - moves}`;
+}
+
 function verify(value) {
 
    for (let ele of articles) {
@@ -75,10 +91,13 @@ function verify(value) {
          y += 1;
       }
 
+      console.log(`${ele.name} - ${ele.point.x} - ${ele.point.y} === ${x} - ${y} ? ${ele.point.x === x && ele.point.y === y}`)
       if (ele.point.x === x && ele.point.y === y && ele.disable === false) {
+         alert("---")
          const oldState = pj.state;
          const move = pj.state.moves[value];
          move();
+         alert(pj.state.name)
          let nameState = pj.state.name;
          nameState = nameState.substring(0, nameState.length - 1);
          pj.state = oldState;
@@ -120,8 +139,9 @@ function verify(value) {
                return true;
             }
          }
-         else if (ele.name === 'hoyo1' || ele.name === 'hoyo2') {
+         else if (ele.name === 'hole1' || ele.name === 'hole2') {
             if (nameState === "transform1") {
+               alert("-222--")
                if (pj.hasKey === true) {
                   pj.hasKey = false;
 
@@ -150,7 +170,6 @@ function verify(value) {
       }
 
    }
-
    return true;
 }
 
@@ -168,6 +187,7 @@ touch.addEvent((value) => {
       rightAnimation = false;
       console.log("--- rigth")
       if (verify('left')) {
+         movePrompt();
          keyframesDeAnimacion = pj.state.moves.right();
          pj.x += 1;
       }
@@ -176,6 +196,7 @@ touch.addEvent((value) => {
       leftAnimation = false;
       console.log("--- left")
       if (verify('right')) {
+         movePrompt();
          keyframesDeAnimacion = pj.state.moves.left();
          pj.x -= 1;
       }
@@ -184,6 +205,7 @@ touch.addEvent((value) => {
       topAnimation = false;
       console.log("--- top")
       if (verify('bottom')) {
+         movePrompt();
          keyframesDeAnimacion = pj.state.moves.bottom();
          pj.y += 1;
       }
@@ -191,6 +213,7 @@ touch.addEvent((value) => {
    else if (pj.y > 0 && bottomAnimation === true) {
       bottomAnimation = false;
       if (verify('top')) {
+         movePrompt();
          keyframesDeAnimacion = pj.state.moves.top();
          pj.y -= 1;
       }

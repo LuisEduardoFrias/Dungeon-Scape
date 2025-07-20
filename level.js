@@ -22,7 +22,7 @@ tait.style.transformOrigin = 'center center';
 const enemy = new Article('enemy', null, tait, false, 'enemy2.png');
 const rock1 = new Article('rock1', null, tait, false, 'rock.png');
 const rock2 = new Article('rock2', null, tait, false, 'rock.png');
-const sword = new Article('sword', null, tait, true, ['sword1.png', 'sword2.png', 'sword3.png', 'sword4.png']);
+const sword = new Article('sword', null, tait, false, ['sword1.png', 'sword2.png', 'sword3.png', 'sword4.png']);
 const shield = new Article('shield', null, tait, true, 'shield.png');
 const hole1 = new Article('hole1', null, tait, false, 'hole.png');
 const hole2 = new Article('hole2', null, tait, false, 'hole.png');
@@ -54,7 +54,8 @@ setBottomPosition
 */
 const levels = [
    {
-      point: { x: 4, y: 2, },
+      point: { x: 3, y: 3, },
+      moves: 5,
       fn: "setBottomPosition",
       objs: () => {
          hole1.point = { x: 0, y: 0, };
@@ -75,6 +76,7 @@ const levels = [
    },
    {
       point: { x: 0, y: 0, },
+      moves: 5,
       fn: "setRightPosition",
       objs: () => {
          rock1.point = { x: 4, y: 0, };
@@ -95,6 +97,7 @@ const levels = [
    },
    {
       point: { x: 2, y: 3, },
+      moves: 5,
       fn: "setBottomPosition",
       objs: () => {
          rock1.point = { x: 2, y: 1, };
@@ -115,6 +118,7 @@ const levels = [
    },
    {
       point: { x: 1, y: 3 },
+      moves: 5,
       fn: 'setLeftPosition',
       objs: () => {
          box1.point = { x: 1, y: 0 };
@@ -135,6 +139,7 @@ const levels = [
    },
    {
       point: { x: 0, y: 1 },
+      moves: 5,
       fn: 'setLeftPosition',
       objs: () => {
          sword.point = { x: 0, y: 0, };
@@ -154,6 +159,7 @@ const levels = [
    },
    {
       point: { x: 2, y: 0 },
+      moves: 5,
       fn: 'setBottomPosition',
       objs: () => {
          rock1.point = { x: 0, y: 1, };
@@ -173,6 +179,7 @@ const levels = [
    },
    {
       point: { x: 0, y: 3 },
+      moves: 5,
       fn: 'setTopPosition',
       objs: () => {
          key.point = { x: 4, y: 0, };
@@ -192,6 +199,7 @@ const levels = [
    },
    {
       point: { x: 1, y: 1 },
+      moves: 5,
       fn: 'setBottomPosition',
       objs: () => {
          key.point = { x: 0, y: 0, };
@@ -209,9 +217,9 @@ const levels = [
          shield.disable = true;
       }
    },
-
    {
       point: { x: 1, y: 1 },
+      moves: 5,
       fn: 'setRightPosition',
       objs: () => {
          enemy.point = { x: 3, y: 0, };
@@ -226,6 +234,126 @@ const levels = [
          openLock.point = { x: 2, y: 4, };
          closedLock.point = { x: 2, y: 3, };
          box2.disable = true;
+         shield.disable = true;
+      }
+   },
+   {
+      point: { x: 4, y: 1 },
+      moves: 5,
+      fn: 'setBottomPosition',
+      objs: () => {
+         enemy.point = { x: 1, y: 0, };
+         key.point = { x: 2, y: 0, };
+         rock1.point = { x: 1, y: 1 };
+         box1.point = { x: 2, y: 2 };
+         box2.point = { x: 3, y: 2 };
+         hole1.point = { x: 4, y: 2, };
+         sword.point = { x: 0, y: 3, };
+
+         rock2.disable = true;
+         hole2.disable = true;
+         openLock.point = { x: 2, y: 4, };
+         closedLock.point = { x: 2, y: 3, };
+         shield.disable = true;
+      }
+   },
+   {
+      point: { x: 2, y: 1 },
+      moves: 5,
+      fn: 'setRightPosition',
+      objs: () => {
+         hole1.point = { x: 4, y: 0, };
+         enemy.point = { x: 1, y: 1, };
+         rock1.point = { x: 3, y: 2 };
+         key.point = { x: 4, y: 2, };
+         sword.point = { x: 0, y: 3, };
+         box1.point = { x: 1, y: 3 };
+
+         box2.disable = true;
+         rock2.disable = true;
+         hole2.disable = true;
+         openLock.point = { x: 2, y: 4, };
+         closedLock.point = { x: 2, y: 3, };
+         shield.disable = true;
+      }
+   },
+   {
+      point: { x: 2, y: 0 },
+      moves: 5,
+      fn: 'setBottomPosition',
+      objs: () => {
+         sword.point = { x: 4, y: 0, };
+         box1.point = { x: 1, y: 1 };
+         key.point = { x: 2, y: 1, };
+         rock1.point = { x: 3, y: 1 };
+         enemy.point = { x: 2, y: 2, };
+         box2.point = { x: 0, y: 3 };
+         hole1.point = { x: 4, y: 4, };
+
+         rock2.disable = true;
+         hole2.disable = true;
+         openLock.point = { x: 2, y: 4, };
+         closedLock.point = { x: 2, y: 3, };
+         shield.disable = true;
+      }
+   },
+   {
+      point: { x: 2, y: 2 },
+      moves: 5,
+      fn: 'setBottomPosition',
+      objs: () => {
+         sword.point = { x: 0, y: 0, };
+         enemy.point = { x: 1, y: 0, };
+         hole1.point = { x: 0, y: 1, };
+         key.point = { x: 1, y: 1, };
+         box1.point = { x: 2, y: 1 };
+         rock1.point = { x: 1, y: 2 };
+         rock2.point = { x: 3, y: 2 };
+
+         box2.disable = true;
+         hole2.disable = true;
+         openLock.point = { x: 2, y: 4, };
+         closedLock.point = { x: 2, y: 3, };
+         shield.disable = true;
+      }
+   },
+   {
+      point: { x: 4, y: 3 },
+      moves: 30,
+      fn: 'setBottomPosition',
+      objs: () => {
+         key.point = { x: 4, y: 0, };
+         sword.point = { x: 0, y: 1, };
+         box1.point = { x: 1, y: 1 };
+         rock1.point = { x: 3, y: 1 };
+         enemy.point = { x: 4, y: 1, };
+         hole1.point = { x: 0, y: 2, };
+         box2.point = { x: 1, y: 2 };
+         hole2.point = { x: 2, y: 2, };
+
+         rock2.disable = true;
+         openLock.point = { x: 2, y: 4, };
+         closedLock.point = { x: 2, y: 3, };
+         shield.disable = true;
+      }
+   },
+   {
+      point: { x: 4, y: 2 },
+      moves: 40,
+      fn: 'setTopPosition',
+      objs: () => {
+         sword.point = { x: 2, y: 0, };
+         box1.point = { x: 1, y: 1 };
+         key.point = { x: 2, y: 1, };
+         box2.point = { x: 3, y: 1 };
+         hole1.point = { x: 0, y: 2, };
+         rock1.point = { x: 2, y: 2 };
+         enemy.point = { x: 4, y: 3, };
+
+         rock2.disable = true;
+         hole2.disable = true;
+         openLock.point = { x: 2, y: 4, };
+         closedLock.point = { x: 2, y: 3, };
          shield.disable = true;
       }
    },

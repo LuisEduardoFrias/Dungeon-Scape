@@ -58,11 +58,19 @@ export class Article {
       return div;
    }
 
+get disable() {
+      return this._disable;
+   }
+   
    set disable(disable) {
       this._disable = disable;
       this._obj.style.opacity = disable ? "0" : "1";
    }
 
+   get name() {
+      return this._name;
+   }
+   
    get point() {
       return this._point;
    }

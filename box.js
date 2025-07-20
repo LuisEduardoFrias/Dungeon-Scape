@@ -58,9 +58,17 @@ export class Box {
       this._obj.style.opacity = disable ? "0" : "1";
    }
 
+   get disable() {
+      return this._disable;
+   }
+   
+   get name() {
+      return this._name;
+   }
+   
    get point() {
       return this._point;
-}
+   }
 
    set point(point) {
       if (!point) return;

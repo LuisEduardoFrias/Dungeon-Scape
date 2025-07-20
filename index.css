@@ -28,7 +28,7 @@ h1 {
    text-align: center;
 }
 
-#level {
+#level,#moves{
    font-size: 26;
    font-weight: bold;
    margin: 10px;
