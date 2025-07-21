@@ -22,6 +22,10 @@ tait.style.transformOrigin = 'center center';
 const enemy = new Article('enemy', null, tait, false, 'enemy2.png');
 const rock1 = new Article('rock1', null, tait, false, 'rock.png');
 const rock2 = new Article('rock2', null, tait, false, 'rock.png');
+const rock3 = new Article('rock3', null, tait, false, 'rock.png');
+const rock4 = new Article('rock4', null, tait, false, 'rock.png');
+const rock6 = new Article('rock5', null, tait, false, 'rock.png');
+const rock5 = new Article('rock6', null, tait, false, 'rock.png');
 const sword = new Article('sword', null, tait, false, ['sword1.png', 'sword2.png', 'sword3.png', 'sword4.png']);
 const shield = new Article('shield', null, tait, true, 'shield.png');
 const hole1 = new Article('hole1', null, tait, false, 'hole.png');
@@ -31,6 +35,12 @@ const closedLock = new Article('closedLock', null, tait, false, 'lock.png');
 const box1 = new Box("box1", tait, null);
 const box2 = new Box("box2", tait, null);
 const key = new Article('key', null, tait, false, 'key.png');
+
+rock3.point = { x: 0, y: 4 };
+rock4.point = { x: 1, y: 4 };
+rock5.point = { x: 3, y: 4 };
+rock6.point = { x: 4, y: 4 };
+
 
 const articles = [
    enemy,
@@ -52,32 +62,27 @@ setLeftPosition
 setTopPosition
 setBottomPosition
 */
+
+function acticleActive() {
+   enemy.disable = false;
+   rock1.disable = false;
+   rock2.disable = false;
+   key.disable = false;
+   sword.disable = false;
+   shield.disable = false;
+   hole1.disable = false;
+   hole2.disable = false;
+   openLock.disable = false;
+   closedLock.disable = false;
+   box1.disable = false;
+   box2.disable = false;
+}
+
 const levels = [
    {
-      point: { x: 3, y: 3, },
-      moves: 5,
-      fn: "setBottomPosition",
-      objs: () => {
-         hole1.point = { x: 0, y: 0, };
-         rock1.point = { x: 1, y: 0, };
-         hole2.point = { x: 2, y: 1, };
-         box1.point = { x: 3, y: 1 };
-         rock2.point = { x: 4, y: 1, };
-         box2.point = { x: 2, y: 2 };
-         key.point = { x: 2, y: 3, };
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
-
-         openLock.disable = true;
-         enemy.disable = true;
-         sword.disable = true;
-         shield.disable = true;
-      }
-   },
-   {
       point: { x: 0, y: 0, },
-      moves: 5,
-      fn: "setRightPosition",
+      moves: 9,
+      fn: "setLeftPosition",
       objs: () => {
          rock1.point = { x: 4, y: 0, };
          hole1.point = { x: 0, y: 1, };
@@ -96,10 +101,34 @@ const levels = [
       }
    },
    {
+      point: { x: 4, y: 0, },
+      moves: 9,
+      fn: "setBottomPosition",
+      objs: () => {
+acticleActive();
+         key.point = { x: 0, y: 0, };
+         box1.point = { x: 1, y: 1 };
+         rock1.point = { x: 2, y: 1, };
+         box2.point = { x: 3, y: 1 };
+         rock2.point = { x: 4, y: 3, };
+
+         openLock.point = { x: 2, y: 4, };
+         closedLock.point = { x: 2, y: 3, };
+
+         hole1.disable = true;
+         hole2.disable = true;
+         openLock.disable = true;
+         enemy.disable = true;
+         sword.disable = true;
+         shield.disable = true;
+      }
+   },
+   {
       point: { x: 2, y: 3, },
       moves: 5,
       fn: "setBottomPosition",
       objs: () => {
+         acticleActive();
          rock1.point = { x: 2, y: 1, };
          rock2.point = { x: 3, y: 1, };
          key.point = { x: 3, y: 3, };
@@ -118,9 +147,10 @@ const levels = [
    },
    {
       point: { x: 1, y: 3 },
-      moves: 5,
-      fn: 'setLeftPosition',
+      moves: 10,
+      fn: 'setRightPosition',
       objs: () => {
+         acticleActive();
          box1.point = { x: 1, y: 0 };
          rock1.point = { x: 3, y: 0, };
          key.point = { x: 1, y: 1, };
@@ -139,9 +169,10 @@ const levels = [
    },
    {
       point: { x: 0, y: 1 },
-      moves: 5,
-      fn: 'setLeftPosition',
+      moves: 10,
+      fn: 'setRightPosition',
       objs: () => {
+         acticleActive();
          sword.point = { x: 0, y: 0, };
          rock1.point = { x: 1, y: 0, };
          enemy.point = { x: 1, y: 1, };
@@ -159,9 +190,10 @@ const levels = [
    },
    {
       point: { x: 2, y: 0 },
-      moves: 5,
+      moves: 19,
       fn: 'setBottomPosition',
       objs: () => {
+         acticleActive();
          rock1.point = { x: 0, y: 1, };
          sword.point = { x: 1, y: 1, };
          enemy.point = { x: 2, y: 1, };
@@ -179,9 +211,10 @@ const levels = [
    },
    {
       point: { x: 0, y: 3 },
-      moves: 5,
+      moves: 29,
       fn: 'setTopPosition',
       objs: () => {
+         acticleActive();
          key.point = { x: 4, y: 0, };
          enemy.point = { x: 0, y: 1, };
          box1.point = { x: 1, y: 1 };
@@ -199,9 +232,10 @@ const levels = [
    },
    {
       point: { x: 1, y: 1 },
-      moves: 5,
+      moves: 23,
       fn: 'setBottomPosition',
       objs: () => {
+         acticleActive();
          key.point = { x: 0, y: 0, };
          sword.point = { x: 1, y: 0, };
          enemy.point = { x: 3, y: 0, };
@@ -219,9 +253,10 @@ const levels = [
    },
    {
       point: { x: 1, y: 1 },
-      moves: 5,
+      moves: 34,
       fn: 'setRightPosition',
       objs: () => {
+         acticleActive();
          enemy.point = { x: 3, y: 0, };
          key.point = { x: 4, y: 0, };
          rock1.point = { x: 2, y: 1 };
@@ -239,9 +274,10 @@ const levels = [
    },
    {
       point: { x: 4, y: 1 },
-      moves: 5,
+      moves: 30,
       fn: 'setBottomPosition',
       objs: () => {
+         acticleActive();
          enemy.point = { x: 1, y: 0, };
          key.point = { x: 2, y: 0, };
          rock1.point = { x: 1, y: 1 };
@@ -259,10 +295,11 @@ const levels = [
    },
    {
       point: { x: 2, y: 1 },
-      moves: 5,
+      moves: 30,
       fn: 'setRightPosition',
       objs: () => {
-         hole1.point = { x: 4, y: 0, };
+         acticleActive();
+         hole1.point = { x: 3, y: 0, };
          enemy.point = { x: 1, y: 1, };
          rock1.point = { x: 3, y: 2 };
          key.point = { x: 4, y: 2, };
@@ -279,16 +316,17 @@ const levels = [
    },
    {
       point: { x: 2, y: 0 },
-      moves: 5,
+      moves: 26,
       fn: 'setBottomPosition',
       objs: () => {
+         acticleActive();
          sword.point = { x: 4, y: 0, };
          box1.point = { x: 1, y: 1 };
          key.point = { x: 2, y: 1, };
          rock1.point = { x: 3, y: 1 };
          enemy.point = { x: 2, y: 2, };
          box2.point = { x: 0, y: 3 };
-         hole1.point = { x: 4, y: 4, };
+         hole1.point = { x: 4, y: 3, };
 
          rock2.disable = true;
          hole2.disable = true;
@@ -299,9 +337,10 @@ const levels = [
    },
    {
       point: { x: 2, y: 2 },
-      moves: 5,
+      moves: 38,
       fn: 'setBottomPosition',
       objs: () => {
+         acticleActive();
          sword.point = { x: 0, y: 0, };
          enemy.point = { x: 1, y: 0, };
          hole1.point = { x: 0, y: 1, };
@@ -320,8 +359,9 @@ const levels = [
    {
       point: { x: 4, y: 3 },
       moves: 30,
-      fn: 'setBottomPosition',
+      fn: 'setTopPosition',
       objs: () => {
+         acticleActive();
          key.point = { x: 4, y: 0, };
          sword.point = { x: 0, y: 1, };
          box1.point = { x: 1, y: 1 };
@@ -339,9 +379,10 @@ const levels = [
    },
    {
       point: { x: 4, y: 2 },
-      moves: 40,
+      moves: 49,
       fn: 'setTopPosition',
       objs: () => {
+         acticleActive();
          sword.point = { x: 2, y: 0, };
          box1.point = { x: 1, y: 1 };
          key.point = { x: 2, y: 1, };

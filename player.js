@@ -982,12 +982,12 @@ export class Player {
          nDiv.style.width = '50px';
          nDiv.style.height = '50px';
          nDiv.style.position = 'absolute';
-         nDiv.style.backgroundColor = 'black';
+         nDiv.style.backgroundColor = '#979797';
          nDiv.style.transformStyle = 'preserve-3d';
 
          if (i === 1) {
             /***   side sword  ****/
-            nDiv.style.backgroundImage = 'url("./images/pj-side.png")';
+            nDiv.style.backgroundImage = 'url("./images/sword.png")';
             nDiv.style.transform = 'rotateX(90deg) translateZ(25px)';
 
             const n2Div = document.createElement('div');
@@ -1002,7 +1002,7 @@ export class Player {
             const n3Div = document.createElement('div');
             n3Div.setAttribute('id', 'sword-on');
             n3Div.dataset.isAdd = false;
-            n3Div.innerHTML = '🗡';
+            //  n3Div.innerHTML = '🗡';
             this._swordOn = n3Div;
             nDiv.appendChild(n3Div);
          } else if (i === 2) {
@@ -1023,7 +1023,7 @@ export class Player {
             nDiv.style.transform = 'rotatey(-90deg) rotateZ(90deg) translatez(25px)';
          } else if (i === 6) {
             /***   side shild  ****/
-            nDiv.style.backgroundImage = 'url("./images/pj-side.png")';
+            nDiv.style.backgroundImage = 'url("./images/shield.png")';
             nDiv.style.transform = 'rotatey(0deg) rotatex(-90deg) translatez(25px)';
 
             const n2Div = document.createElement('div');
@@ -1082,9 +1082,9 @@ export class Player {
       this._point = point;
       //this._obj.style.top = `${(50 * point.y)}px`;
       //this._obj.style.left = `${(50 * point.x)}px`;
-      //this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
 
-      this._obj.style.transform = `translateZ(27px) translateY(${50 * point.y}px) translateX(${50 * point.x}px) ${this._state.key}`;
+      //this._obj.style.transform = `translateZ(27px) translateY(${50 * point.y}px) translateX(${50 * point.x}px) ${this._state.key}`;
    }
 
    set x(x) {
@@ -1112,4 +1112,24 @@ export class Player {
    setTopPosition() { this._state = this.#transform14; }
    setRightPosition() { this._state = this.#transform11; }
 
+   setBottomRotate() {
+      this._state = this.#transform32;
+      this._obj.style.transition = 'transform 1s ease';
+      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+   }
+   setLeftRotate() {
+      this._state = this.#transform33;
+      this._obj.style.transition = 'transform 1s ease';
+      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+   }
+   setTopRotate() {
+      this._state = this.#transform34;
+      this._obj.style.transition = 'transform 1s ease';
+      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+   }
+   setRightRotate() {
+      this._state = this.#transform31;
+      this._obj.style.transition = 'transform 1s ease';
+      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+   }
 }
