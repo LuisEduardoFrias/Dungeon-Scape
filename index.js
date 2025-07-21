@@ -8,6 +8,10 @@ function init() {
    const place = new Place(tait);
    let pj = new Player(tait);
 
+   let level = localStorage.getItem("level") ?? 0;
+   const btn_reset_level = document.querySelector("#btn-reset-level");
+   const btn_reset_game = document.querySelector("#btn-reset-game");
+
    let moves = 0;
    let start = false;
    const btn_start = document.querySelector("#btn-start");
@@ -19,16 +23,20 @@ function init() {
    let moves_label = document.querySelector("#moves");
    let playerInput = document.querySelector("#player-input");
    const panelStart = document.querySelector("#panel-start");
-   let level = 0;
+   const panelFinished = document.querySelector("#panel-finished");
+   panelFinished.style.visibility = "hidden";
+
    let isNextLevel = false;
 
    btn_rotate.addEventListener('click', btnRotate);
    btn_start.addEventListener('click', btnStart);
+   btn_reset_level.addEventListener('click', () => window.location.reload());
+   btn_reset_game.addEventListener('click', () => { localStorage.removeItem("level"); panelFinished.style.visibility = "hidden"; window.location.reload(); });
 
-   return { pj, touch, place, start, panelStart, moves, swordOn, shieldOn, keyOn, moves_label, level_label, playerInput, level, isNextLevel };
+   return { pj, touch, place, start, panelStart, panelFinished, moves, swordOn, shieldOn, keyOn, moves_label, level_label, playerInput, level, isNextLevel };
 }
 
-let { pj, touch, place, moves, start, panelStart, swordOn, shieldOn, keyOn, moves_label, level_label, playerInput, level, isNextLevel } = init();
+let { pj, touch, place, moves, start, panelStart, panelFinished, swordOn, shieldOn, keyOn, moves_label, level_label, playerInput, level, isNextLevel } = init();
 
 function nextLevel() {
 
@@ -41,7 +49,12 @@ function nextLevel() {
    }
 
    function nextL() {
+      localStorage.setItem("level", level);
       level++;
+
+if(level === 16) {
+   panelFinished.style.visibility = "visible";
+}
 
       const objLevel = levels[level - 1];
 
@@ -166,6 +179,7 @@ function verify(value) {
             } else if (ele.disable === true) {
                return true;
             }
+            return true;
          }
          else if (ele.name === 'hole1' || ele.name === 'hole2') {
             if (nameState === "transform1") {

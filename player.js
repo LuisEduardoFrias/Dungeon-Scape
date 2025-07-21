@@ -1120,21 +1120,58 @@ export class Player {
    setBottomRotate() {
       this._state = this.#transform32;
       this._obj.style.transition = 'transform 1s ease';
-      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      // this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+
+      const opcionesDeTemporizacion = {
+         duration: 1000,
+         iterations: 1,
+         easing: 'ease-in-out',
+         fill: 'forwards'
+      };
+
+      const keyframesDeAnimacion = [{ transform: `translateZ(27px) translateY(${50 * this._point.y}px) translateX(${50 * this._point.x}px) ${this._state.key}` }];
+      this._obj.animate(keyframesDeAnimacion, opcionesDeTemporizacion);
    }
    setLeftRotate() {
       this._state = this.#transform33;
       this._obj.style.transition = 'transform 1s ease';
-      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      // this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      const opcionesDeTemporizacion = {
+         duration: 1000,
+         iterations: 1,
+         easing: 'ease-in-out',
+         fill: 'forwards'
+      };
+
+      const keyframesDeAnimacion = [{ transform: `translateZ(27px) translateY(${50 * this._point.y}px) translateX(${50 * this._point.x}px) ${this._state.key}` }];
+      this._obj.animate(keyframesDeAnimacion, opcionesDeTemporizacion);
    }
    setTopRotate() {
       this._state = this.#transform34;
       this._obj.style.transition = 'transform 1s ease';
-      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      // this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      const opcionesDeTemporizacion = {
+         duration: 1000,
+         iterations: 1,
+         easing: 'ease-in-out',
+         fill: 'forwards'
+      };
+
+      const keyframesDeAnimacion = [{ transform: `translateZ(27px) translateY(${50 * this._point.y}px) translateX(${50 * this._point.x}px) ${this._state.key}` }];
+      this._obj.animate(keyframesDeAnimacion, opcionesDeTemporizacion);
    }
    setRightRotate() {
       this._state = this.#transform31;
       this._obj.style.transition = 'transform 1s ease';
-      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      // this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
+      const opcionesDeTemporizacion = {
+         duration: 1000,
+         iterations: 1,
+         easing: 'ease-in-out',
+         fill: 'forwards'
+      };
+
+      const keyframesDeAnimacion = [{ transform: `translateZ(27px) translateY(${50 * this._point.y}px) translateX(${50 * this._point.x}px) ${this._state.key}` }];
+      this._obj.animate(keyframesDeAnimacion, opcionesDeTemporizacion);
    }
 }

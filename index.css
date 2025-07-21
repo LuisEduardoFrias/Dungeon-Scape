@@ -51,7 +51,8 @@ h1 {
 
 
 
-#panel-start {
+#panel-start,
+#panel-finished {
    z-index: 99;
    position: absolute;
    top: 0;
@@ -64,6 +65,27 @@ h1 {
    display: flex;
    justify-content: center;
    align-items: center;
+}
+
+#panel-finished {
+   padding-top: 20px;
+   background: #00000086;
+   justify-content: flex-start;
+   display: flex;
+   flex-direction: column;
+   color: white;
+   gap: 20px;
+   visibility: hidden;
+}
+
+#panel-finished>h2 {
+   font-size: 16px;
+   padding-inline: 35px;
+   font-weight: 700;
+}
+
+#panel-finished>a {
+   color: white;
 }
 
 #btn-start {
@@ -102,7 +124,9 @@ h1 {
    /* perspective-origin: center; */
 }
 
-#btn-rotate {
+#btn-rotate,
+#btn-reset-level,
+#btn-reset-game {
    z-index: 8;
    position: absolute;
    top: 10px;
@@ -121,6 +145,20 @@ h1 {
 #btn-rotate:active {
    border: 1px solid #f50000;
    box-shadow: none;
+}
+
+#btn-reset-level {
+   top: 70px;
+   background-image: none;
+   font-weight: 900;
+   border-radius: 20%;
+}
+
+#btn-reset-game {
+   top: 130px;
+   background-image: none;
+   font-weight: 900;
+   border-radius: 20%;
 }
 
 #options-move-container {
