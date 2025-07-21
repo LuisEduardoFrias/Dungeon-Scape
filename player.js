@@ -987,7 +987,7 @@ export class Player {
 
          if (i === 1) {
             /***   side sword  ****/
-            nDiv.style.backgroundImage = 'url("./images/sword.png")';
+            nDiv.style.backgroundImage = 'url("./images/pj-side.png")';
             nDiv.style.transform = 'rotateX(90deg) translateZ(25px)';
 
             const n2Div = document.createElement('div');
@@ -1001,8 +1001,10 @@ export class Player {
 
             const n3Div = document.createElement('div');
             n3Div.setAttribute('id', 'sword-on');
-            n3Div.dataset.isAdd = false;
-            //  n3Div.innerHTML = '🗡';
+            n3Div.style.backgroundImage = 'url("./images/sword.png")';
+            n3Div.dataset.isAdd = "false";
+            n3Div.style.transform = 'rotateZ(45deg)';
+
             this._swordOn = n3Div;
             nDiv.appendChild(n3Div);
          } else if (i === 2) {
@@ -1080,30 +1082,33 @@ export class Player {
 
    set point(point) {
       this._point = point;
-      //this._obj.style.top = `${(50 * point.y)}px`;
-      //this._obj.style.left = `${(50 * point.x)}px`;
-      this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
 
-      //this._obj.style.transform = `translateZ(27px) translateY(${50 * point.y}px) translateX(${50 * point.x}px) ${this._state.key}`;
+      const opcionesDeTemporizacion = {
+         duration: 1000,
+         iterations: 1,
+         easing: 'ease-in-out',
+         fill: 'forwards'
+      };
+
+      const keyframesDeAnimacion = [{ transform: `translateZ(27px) translateY(${50 * point.y}px) translateX(${50 * point.x}px) ${this._state.key}` }];
+      this._obj.animate(keyframesDeAnimacion, opcionesDeTemporizacion);
    }
 
    set x(x) {
       this._point = { ...this._point, x };
-      //this._obj.style.left = `${(50 * x)}px`;
-      //this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
    }
 
    set y(y) {
       this._point = { ...this._point, y };
-      //this._obj.style.top = `${(50 * y)}px`;
-      //this._obj.style.transform = `translateZ(27px) ${this._state.key}`;
    }
 
    set shieldOn(activate) {
+      this._shieldOn.dataset.isAdd = activate;
       this._shieldOn.style.opacity = activate ? '1' : '0';
    }
 
    set swordOn(activate) {
+      this._swordOn.dataset.isAdd = activate;
       this._swordOn.style.opacity = activate ? '1' : '0';
    }
 

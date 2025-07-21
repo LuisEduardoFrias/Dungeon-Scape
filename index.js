@@ -13,6 +13,8 @@ function init() {
    const btn_start = document.querySelector("#btn-start");
    const btn_rotate = document.querySelector("#btn-rotate");
    const keyOn = document.querySelector("#key-on");
+   const swordOn = document.querySelector("#sword-on2");
+   const shieldOn = document.querySelector("#shield-on2");
    let level_label = document.querySelector("#level");
    let moves_label = document.querySelector("#moves");
    let playerInput = document.querySelector("#player-input");
@@ -23,10 +25,10 @@ function init() {
    btn_rotate.addEventListener('click', btnRotate);
    btn_start.addEventListener('click', btnStart);
 
-   return { pj, touch, place, start, panelStart, moves, keyOn, moves_label, level_label, playerInput, level, isNextLevel };
+   return { pj, touch, place, start, panelStart, moves, swordOn, shieldOn, keyOn, moves_label, level_label, playerInput, level, isNextLevel };
 }
 
-let { pj, touch, place, moves, start, panelStart, keyOn, moves_label, level_label, playerInput, level, isNextLevel } = init();
+let { pj, touch, place, moves, start, panelStart, swordOn, shieldOn, keyOn, moves_label, level_label, playerInput, level, isNextLevel } = init();
 
 function nextLevel() {
 
@@ -35,9 +37,7 @@ function nextLevel() {
    } else {
       panelStart.style.visibility = 'visible';
       start = false;
-      setTimeout(() => {
-         nextL();
-      }, 1300)
+      nextL();
    }
 
    function nextL() {
@@ -48,9 +48,13 @@ function nextLevel() {
       pj[objLevel.fn]();
       pj.point = { ...objLevel.point };
       pj.hasKey = false;
-      keyOn.style.visibility = 'hidden';
+      keyOn.style.filter = "grayscale(100%)";
+      swordOn.style.filter = "grayscale(100%)";
+      shieldOn.style.filter = "grayscale(100%)";
       objLevel.objs();
       moves = 0;
+      moves_label.style.color = "black";
+      pj.swordOn = false;
       isNextLevel = false;
 
       moves_label.innerHTML = `Moves: ${objLevel.moves}`;
@@ -116,6 +120,8 @@ function verify(value) {
          y += 1;
       }
 
+      activeShield(value);
+
       if (ele.point.x === x && ele.point.y === y && ele.disable === false) {
 
          const oldState = pj.state;
@@ -130,7 +136,7 @@ function verify(value) {
             if (nameState === "transform1" && ele.disable === false) {
                pj.hasKey = true;
                ele.disable = true;
-               keyOn.style.visibility = 'visible';
+               keyOn.style.filter = "grayscale(0%)";
 
                return true;
             } else if (ele.disable === true) {
@@ -150,9 +156,10 @@ function verify(value) {
             if (nameState === "transform2" && ele.disable === false) {
                ele.disable = true;
 
-               const key = articles.find((el) => el.name === "enemy");
-               key.disable = true;
-
+               const enemy = articles.find((el) => el.name === "enemy");
+               enemy.disable = true;
+               swordOn.style.filter = "grayscale(0%)";
+               swordOn.style.filter = "grayscale(0%)";
                pj.swordOn = true;
 
                return true;
@@ -164,7 +171,7 @@ function verify(value) {
             if (nameState === "transform1") {
                if (pj.hasKey === true) {
                   pj.hasKey = false;
-                  keyOn.style.visibility = 'hidden';
+                  keyOn.style.filter = "grayscale(100%)";
                   const key = articles.find((el) => el.name === "key");
                   key.disable = false;
                }
@@ -240,6 +247,23 @@ function btnStart() {
    start = true;
    panelStart.style.visibility = 'hidden';
 };
+
+function activeShield(value) {
+   const oldState = pj.state;
+   const move = pj.state.moves[value];
+   move();
+
+   let nameState = pj.state.name;
+   nameState = nameState.substring(0, nameState.length - 1);
+   pj.state = oldState;
+
+   if (nameState === "transform3") {
+      shieldOn.style.filter = "grayscale(0%)";
+   }
+   else {
+      shieldOn.style.filter = "grayscale(100%)";
+   }
+}
 
 
 touch.addEvent((value) => {

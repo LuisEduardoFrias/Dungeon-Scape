@@ -73,9 +73,13 @@ function acticleActive() {
    hole1.disable = false;
    hole2.disable = false;
    openLock.disable = false;
-   closedLock.disable = false;
    box1.disable = false;
    box2.disable = false;
+   closedLock.disable = false;
+
+   closedLock.point = { x: 2, y: 3, };
+   openLock.point = { x: 2, y: 4, };
+   openLock.disable = true;
 }
 
 const levels = [
@@ -84,16 +88,15 @@ const levels = [
       moves: 9,
       fn: "setLeftPosition",
       objs: () => {
+         acticleActive();
+
          rock1.point = { x: 4, y: 0, };
          hole1.point = { x: 0, y: 1, };
          rock2.point = { x: 1, y: 1, };
          box1.point = { x: 2, y: 1 };
          key.point = { x: 4, y: 1, };
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          box2.point = { x: 3, y: 2 };
 
-         openLock.disable = true;
          enemy.disable = true;
          sword.disable = true;
          shield.disable = true;
@@ -105,19 +108,15 @@ const levels = [
       moves: 9,
       fn: "setBottomPosition",
       objs: () => {
-acticleActive();
+         acticleActive();
          key.point = { x: 0, y: 0, };
          box1.point = { x: 1, y: 1 };
          rock1.point = { x: 2, y: 1, };
          box2.point = { x: 3, y: 1 };
          rock2.point = { x: 4, y: 3, };
 
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
-
          hole1.disable = true;
          hole2.disable = true;
-         openLock.disable = true;
          enemy.disable = true;
          sword.disable = true;
          shield.disable = true;
@@ -133,12 +132,9 @@ acticleActive();
          rock2.point = { x: 3, y: 1, };
          key.point = { x: 3, y: 3, };
          hole1.point = { x: 1, y: 3, };
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          box1.point = { x: 1, y: 2 };
          box2.point = { x: 4, y: 2 };
 
-         openLock.disable = true;
          enemy.disable = true;
          sword.disable = true;
          shield.disable = true;
@@ -162,8 +158,6 @@ acticleActive();
          hole2.point = { x: 3, y: 3, };
 
          shield.point = { x: 1, y: 4, };
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          shield.disable = true;
       }
    },
@@ -182,8 +176,6 @@ acticleActive();
          key.point = { x: 1, y: 3, };
          hole1.point = { x: 3, y: 3, };
 
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          hole2.disable = true;
          shield.disable = true;
       }
@@ -202,8 +194,6 @@ acticleActive();
          box2.point = { x: 3, y: 2 };
          rock2.point = { x: 4, y: 2, };
 
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          hole1.disable = true;
          hole2.disable = true;
          shield.disable = true;
@@ -224,8 +214,6 @@ acticleActive();
          hole1.point = { x: 3, y: 3, };
          sword.point = { x: 4, y: 3, };
 
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          hole2.disable = true;
          shield.disable = true;
       }
@@ -244,8 +232,6 @@ acticleActive();
          hole1.point = { x: 1, y: 2, };
          rock2.point = { x: 2, y: 2 };
 
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          box2.disable = true;
          hole2.disable = true;
          shield.disable = true;
@@ -266,8 +252,6 @@ acticleActive();
          box1.point = { x: 2, y: 2 };
          hole2.point = { x: 1, y: 3, };
 
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          box2.disable = true;
          shield.disable = true;
       }
@@ -288,8 +272,6 @@ acticleActive();
 
          rock2.disable = true;
          hole2.disable = true;
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          shield.disable = true;
       }
    },
@@ -309,8 +291,6 @@ acticleActive();
          box2.disable = true;
          rock2.disable = true;
          hole2.disable = true;
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          shield.disable = true;
       }
    },
@@ -330,8 +310,6 @@ acticleActive();
 
          rock2.disable = true;
          hole2.disable = true;
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          shield.disable = true;
       }
    },
@@ -351,8 +329,6 @@ acticleActive();
 
          box2.disable = true;
          hole2.disable = true;
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          shield.disable = true;
       }
    },
@@ -372,8 +348,6 @@ acticleActive();
          hole2.point = { x: 2, y: 2, };
 
          rock2.disable = true;
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          shield.disable = true;
       }
    },
@@ -393,8 +367,6 @@ acticleActive();
 
          rock2.disable = true;
          hole2.disable = true;
-         openLock.point = { x: 2, y: 4, };
-         closedLock.point = { x: 2, y: 3, };
          shield.disable = true;
       }
    },

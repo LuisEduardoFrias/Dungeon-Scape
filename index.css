@@ -6,6 +6,12 @@
    box-sizing: border-box;
 }
 
+a {
+   text-decoration-line: none;
+   font-weight: bold;
+   color: black;
+   cursor: pointer;
+}
 
 #game-container {
    height: 100dvh;
@@ -27,7 +33,7 @@ header>div {
    height: 100%;
    display: flex;
    align-items: center;
-   gap: 3px;
+   gap: 15px;
 }
 
 h1 {
@@ -40,18 +46,10 @@ h1 {
 #moves {
    font-size: 26;
    font-weight: bold;
-   margin: 10px;
+
 }
 
-#key-on {
-   visibility: hidden;
-   display: inline;
-   width: 50px;
-   height: 50px;
-   transform: rotateZ(90deg);
-   background-image: url("./images/key.png");
-   background-size: cover;
-}
+
 
 #panel-start {
    z-index: 99;
@@ -236,9 +234,9 @@ h1 {
 /*///////////////*/
 /*     pj        */
 /*///////////////*/
-
-#pj #sword-on {
-   background-color: red;
+#sword-on,
+#shield-on {
+   /* background-color: #426593; */
    border-radius: 100%;
    width: 90%;
    height: 90%;
@@ -252,19 +250,11 @@ h1 {
    transform: translate(-50%, -50%);
 }
 
-#pj #shield-on {
-   background-color: #5e2100;
-   border-radius: 100%;
-   width: 90%;
-   height: 90%;
-   position: absolute;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   font-size: 30px;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
+#sword-on {
+   background-size: cover;
+   background-repeat: no-repeat;
+   top: 0px;
+   left: 0px;
 }
 
 #sword-content-shadow,
@@ -277,6 +267,36 @@ h1 {
    justify-content: center;
    align-items: center;
    font-size: 30px;
+}
+
+#sword-on2,
+#shield-on2,
+#key-on {
+   display: inline;
+   width: 50px;
+   height: 50px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transform: rotateZ(90deg);
+   background-image: url("./images/key.png");
+   filter: grayscale(0%);
+   background-position-x: -6px;
+   background-color: #fdf739;
+   padding: 8px;
+   width: 40px;
+   padding: 5px;
+   border-radius: 8px;
+   padding-inline: 5px;
+   margin-inline: 5px;
+}
+
+#sword-on2 {
+   background-image: url("./images/sword.png");
+}
+
+#shield-on2 {
+   background-image: url("./images/shield.png");
 }
 
 #sword-shadow,
